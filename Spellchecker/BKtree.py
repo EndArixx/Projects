@@ -165,14 +165,23 @@ def test2(list):
 	brutus("tri",list,retlen,1)
 
 if __name__ == "__main__":
-				#create 2 random lists of words
+
+        with open('american-english') as f:
+            USAdict = f.read().splitlines()
+        
+        USAtree = Bktree(retlen , USAdict)
+        print(USAtree.search("jurgs",1))
+ 
+'''
+    #create 2 random lists of words
 				#one with small diff in data
 	list1 = radlist(1,10,500)
 				#for testing ignore
 	list2 = radlist(1,10,500)	
-				#one with a larch diff in the data
+				#one with a large diff in the data
 	list3 = radlist(1,35,5000)
-				
+		
+                                #read a list of english words into a list
 				#small list test data
 	tyme = time.time()
 	tree1 = Bktree(retlen,list1)
@@ -210,16 +219,4 @@ if __name__ == "__main__":
 	tyme = time.time()	
 	print(brutus("tri",list3,retlen,1))
 	print "\nbrute search took:" , (time.time() - tyme)
-
-
-
-
-
-
-
-
-
-
-
-
-
+'''
