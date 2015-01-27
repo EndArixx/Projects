@@ -120,39 +120,14 @@ if __name__ == "__main__":
 	
         #find database for actual words
 
-        list = []
-	for i in range(2000):
-		#rng = random.randint(5,6)
-		size = 3
-		allowed = string.ascii_letters
-		randomstring = ''.join([allowed[random.randint(0, len(allowed) - 1)] for x in xrange(size)])
-		#print randomstring
-		list1.append(randomstring)
-	list2 = []
-	for i in range(2000):
-		rng = random.randint(1,4)
-		size = rng
-		allowed = string.ascii_letters
-		randomstring = ''.join([allowed[random.randint(0, len(allowed) - 1)] for x in xrange(size)])
-		list2.append(randomstring)
+	with open('american-english') as f:
+		listofUSWords = f.read().splitlines()
 
 
-
-
-
-
-	tree1 = BKTree(levfunc,list1)
+	USWordTree = BKTree(levfunc,listofUSWords)
 	print "FIND tri"
-	print tree1.query("tri",1)
-	print brutus("tri",list1,levfunc,1)
-
-	tree2 = BKTree(levfunc,list2)
-	print "FIND bat"
-	print tree2.query("bat",1)
-	print brutus("bat",list2,levfunc,1)
-
-
-
+	print USWordTree.query("tri",1)
+	print USWordTree.query("bananar",2)
 
 
 
