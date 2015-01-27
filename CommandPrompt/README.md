@@ -1,4 +1,10 @@
-This folder contains a Spell checking program written in Python
+This folder contains a Command line interface Written in C
 
-this program uses a levenstein distance algorithm conbined with a BK tree to
-quickly search for similar words.
+(this was Created in a Linux: Ubuntu 12.04 enviroment)
+
+Instructions
+  1) type: "make" to compile
+  2) type: "./run" to run the program
+  
+CommandLineInt.c  
+  (this is the main program)
