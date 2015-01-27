@@ -123,11 +123,25 @@ if __name__ == "__main__":
 	with open('american-english') as f:
 		listofUSWords = f.read().splitlines()
 
-
+	print ("Building BKTree of US Words");
 	USWordTree = BKTree(levfunc,listofUSWords)
-	print "FIND tri"
-	print USWordTree.query("tri",1)
-	print USWordTree.query("bananar",2)
+	
+	targetword = raw_input('Enter a Word:') 
+	while targetword != 'quit':
+		i = 0;
+		print ('searching for ' + targetword)
+		output = USWordTree.query(str(targetword),i)
+		while not output:
+			i=i+1
+			if i > 9:
+				print "lev 9 not found, aborting"
+				break
+			print "not found with a lev distance of: " +str(i-1) + " trying: " + str(i)
+			output = USWordTree.query(str(targetword),i)
+		print output
+		targetword = raw_input('Enter a Word or "quit": ')
+	print('Shutting down')
+	
 
 
 
