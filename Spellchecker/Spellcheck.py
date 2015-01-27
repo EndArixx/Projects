@@ -4,6 +4,7 @@
 #		  John Stanley			   #
 #						   #
 #	      Python Language class	  	   #
+#		     CS 2100			   #
 #	   Western Michigan University		   #
 #         Bk-Tree + Levenstein distance		   #
 ####################################################
