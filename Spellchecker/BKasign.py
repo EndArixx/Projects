@@ -1,9 +1,13 @@
 ####################################################
+#						   #
+#             Python Spell Checker   		   #
 #		  John Stanley			   #
-#		   Asignment 4			   #
-#		     Python			   #
-#                    Bk-Tree			   #
+#						   #
+#	      Python Language class	  	   #
+#	   Western Michigan University		   #
+#         Bk-Tree + Levenstein distance		   #
 ####################################################
+
 
 
 from itertools import imap, ifilter
