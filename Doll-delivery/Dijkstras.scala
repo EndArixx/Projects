@@ -3,7 +3,7 @@ package code
 /**
 * Dijkstra's Algorithm.
 * 
-* implemented in Scala by John Stanley 
+* Implemented in Scala by John Stanley 
 */
 
 
@@ -19,7 +19,14 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
   def data()
   {
     println(instart + intarget)
-    println(edges.mkString("\n"));
+    //println(edges.mkString("\n"));
+    
+    
+      //Tests, learning to use maps
+    println((edges apply 2)("distance"));
+    var line1 = (edges apply 1)("startLocation")
+    println(line1);
+    
   }
   
   
