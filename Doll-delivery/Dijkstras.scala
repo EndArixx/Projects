@@ -7,6 +7,28 @@ package code
 */
 
 
+class Dijkstras(instart: String , intarget: String, inedges: List[scala.collection.immutable.Map[String,Any]])
+{
+  //note: List[scala.collection.immutable.Map[String,Any]
+  
+  
+  
+  var edges = inedges
+  var start = instart
+  var target = intarget
+  def data()
+  {
+    println(instart + intarget)
+    println(edges.mkString("\n"));
+  }
+  
+  
+  
+  
+}
+
+
+
 /*
  * Sudo code from Wikipedia
  *          http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
@@ -40,17 +62,3 @@ package code
 28
 29  end function
  */
-
-class Dijkstras(xc: Int)
-{
-  var x: Int = xc
-  def data()
-  {
-    println(x)
-  }
-  
-  
-  
-  
-}
-

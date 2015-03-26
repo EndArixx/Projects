@@ -2,12 +2,14 @@ package run
 
 import scala.io.Source
 import code.Dijkstras  //import algorithm
-
+    
+      //compile:    scalac *.scala
+      // run:       scala run.test 
 
 
 object test {
   def main(args: Array[String]) {
-    println("Wake up Neo!")
+    //println("Wake up Neo!")
     
     //val input = readLine("TEST: ")
        
@@ -29,13 +31,8 @@ object test {
     //val start
     //val target 
     
-      //test using muliple classes
-    //println(new Dijkstras data)
-    val dijk =  new Dijkstras(3)
-    dijk.data()
-    
-      //compile:    scalac *.scala
-      // run:       scala run.test 
+
+
       
     
     
@@ -69,6 +66,11 @@ object test {
     //println(edges.mkString("\n"));
        //choose a specific element
     //println(edges apply 2);
+    
+          //test using muliple classes
+    //println(new Dijkstras data)
+    val dijk =  new Dijkstras("test" , "moretest", edges)
+    dijk.data()
     
     
 
