@@ -1,45 +1,10 @@
-package run
+    startingLocation: "Kruthika's abode"
 
-import scala.io.Source
-import code.Dijkstras  //import algorithm
+    targetLocation: "Craig's haunt"
 
+    edges: 
 
-
-object test {
-  def main(args: Array[String]) {
-    println("Wake up Neo!")
-    
-    //val input = readLine("TEST: ")
-       
-    /*
-    val filename = input
-    try 
-    {
-        for(line <- Source.fromFile(filename).getLines())
-        {
-          println(line)
-          
-        }
-    }
-    catch
-    {
-      case ex: Exception => println("Error: file \""+ input +"\" not found.")  
-    }*/
-    
-    //val start
-    //val target 
-    
-      //test using muliple classes
-    //println(new Dijkstras data)
-    val dijk =  new Dijkstras(3)
-    dijk.data()
-    
-      //compile:    scalac *.scala
-      // run:       scala run.test 
-      
-    
-    
-    val edges = List(
+    List(
       Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Mark's crib", "distance" -> 9),
       Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Greg's casa", "distance" -> 4),
       Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Matt's pad", "distance" -> 18),
@@ -64,15 +29,3 @@ object test {
       Map("startLocation" -> "Cam's dwelling", "endLocation" -> "Craig's haunt", "distance" -> 18),
       Map("startLocation" -> "Nathan's flat", "endLocation" -> "Kirk's farm", "distance" -> 3)
     )
-    
-        //print out list
-    //println(edges.mkString("\n"));
-       //choose a specific element
-    //println(edges apply 2);
-    
-    
-
-    
-  }
-}
-
