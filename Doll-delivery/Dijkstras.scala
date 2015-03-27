@@ -16,7 +16,53 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
   var edges = inedges
   var start = instart
   var target = intarget
-  def data()
+  def ShortestPath()//graph : Array[Int], source : Int)
+  {
+		val graph = new Array[Int](10)
+		//Sudo code from Wikipedia
+			//    http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+		//function Dijkstra(Graph, source):
+  
+        //dist[source] ← 0                       // Distance from source to source
+		val distance = new Array[Int](graph.length)
+		/*distance(9) = 17
+		println(distance(9));*/
+		
+		//prev[source] ← undefined               // Previous node in optimal path initialization
+		val previous = new Array[Int](graph.length)  
+  
+        //for each vertex v in Graph:  // Initialization
+            //if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
+                //dist[v] ← infinity             // Unknown distance function from source to v
+                //prev[v] ← undefined            // Previous node in optimal path from source
+            //end if 
+            //add v to Q                     // All nodes initially in Q (unvisited nodes)
+        //end for
+        
+        //while Q is not empty:
+            //u ← vertex in Q with min dist[u]  // Source node in first case
+            //remove u from Q 
+            
+            //for each neighbor v of u:           // where v is still in Q.
+                //alt ← dist[u] + length(u, v)
+                //if alt < dist[v]:               // A shorter path to v has been found
+                    //dist[v] ← alt 
+                    //prev[v] ← u 
+                //end if
+            //end for
+        //end while
+  
+        //return dist[], prev[]
+  
+    //end function
+	println("Finished")
+  }
+  
+  
+  
+  
+  
+  /*def data() //testing 
   {
     println(instart + intarget)
     //println(edges.mkString("\n"));
@@ -26,8 +72,7 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
     println((edges apply 2)("distance"));
     var line1 = (edges apply 1)("startLocation")
     println(line1);
-    
-  }
+  }*/
   
   
   
@@ -36,36 +81,3 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
 
 
 
-/*
- * Sudo code from Wikipedia
- *          http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
- * function Dijkstra(Graph, source):
- 2
- 3      dist[source] ← 0                       // Distance from source to source
- 4      prev[source] ← undefined               // Previous node in optimal path initialization
- 5
- 6      for each vertex v in Graph:  // Initialization
- 7          if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
- 8              dist[v] ← infinity             // Unknown distance function from source to v
- 9              prev[v] ← undefined            // Previous node in optimal path from source
-10          end if 
-11          add v to Q                     // All nodes initially in Q (unvisited nodes)
-12      end for
-13      
-14      while Q is not empty:
-15          u ← vertex in Q with min dist[u]  // Source node in first case
-16          remove u from Q 
-17          
-18          for each neighbor v of u:           // where v is still in Q.
-19              alt ← dist[u] + length(u, v)
-20              if alt < dist[v]:               // A shorter path to v has been found
-21                  dist[v] ← alt 
-22                  prev[v] ← u 
-23              end if
-24          end for
-25      end while
-26
-27      return dist[], prev[]
-28
-29  end function
- */

@@ -70,7 +70,8 @@ object test {
           //test using muliple classes
     //println(new Dijkstras data)
     val dijk =  new Dijkstras("test" , "moretest", edges)
-    dijk.data()
+    //dijk.data()
+	dijk.ShortestPath()
     
     
 
