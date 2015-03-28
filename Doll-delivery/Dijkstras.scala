@@ -18,7 +18,11 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
   var target = intarget
   def ShortestPath()//graph : Array[Int], source : Int)
   {
-		val graph = new Array[Int](10)
+		val graph = new Array[Int](2)
+		graph(0) = 0;
+		graph(1) = 1;
+		
+		val source = 0
 		//Sudo code from Wikipedia
 			//    http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 		//function Dijkstra(Graph, source):
@@ -30,15 +34,21 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
 		
 		//prev[source] ← undefined               // Previous node in optimal path initialization
 		val previous = new Array[Int](graph.length)  
-  
+		
         //for each vertex v in Graph:  // Initialization
-            //if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
-                //dist[v] ← infinity             // Unknown distance function from source to v
+        for(v <- graph)
+		{
+			//if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
+             if(v != source)
+			 {
+				println(v);
+			 }
+				//dist[v] ← infinity             // Unknown distance function from source to v
                 //prev[v] ← undefined            // Previous node in optimal path from source
             //end if 
             //add v to Q                     // All nodes initially in Q (unvisited nodes)
         //end for
-        
+        }
         //while Q is not empty:
             //u ← vertex in Q with min dist[u]  // Source node in first case
             //remove u from Q 
