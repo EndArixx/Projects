@@ -62,6 +62,11 @@ object test {
       Map("startLocation" -> "Nathan's flat", "endLocation" -> "Kirk's farm", "distance" -> 3)
     )
     
+    
+    val test = List(
+     
+    
+    
         //print out list
     //println(edges.mkString("\n"));
        //choose a specific element
