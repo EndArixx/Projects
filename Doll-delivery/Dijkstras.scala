@@ -39,15 +39,17 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
         for(v <- graph)
 		{
 			//if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
-             if(v != source)
+       if(v != source)
 			 {
-				println(v);
-			 }
-				//dist[v] ← infinity             // Unknown distance function from source to v
-                //prev[v] ← undefined            // Previous node in optimal path from source
-            //end if 
+				    //dist[v] ← infinity             // Unknown distance function from source to v
+            //prev[v] ← undefined            // Previous node in optimal path from source
+           distance(v) = 99999999 //find max int
+           previous(v) = -1
+           //end if 
+       }
             //add v to Q                     // All nodes initially in Q (unvisited nodes)
-        //end for
+            
+         //end for
         }
         //while Q is not empty:
             //u ← vertex in Q with min dist[u]  // Source node in first case
