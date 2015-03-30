@@ -51,42 +51,40 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
     while(Q.length > 0)
     { 
             //u ← vertex in Q with min dist[u]  // Source node in first case
-        val u = Q.dequeue
+          val u = Q.dequeue
             //remove u from Q 
-            
+          println(graph(u)(0));
             //for each neighbor v of u:           // where v is still in Q.
-        
+          for(v <- graph(u))
+          {
+              
                 //alt ← dist[u] + length(u, v)
+              val alt = distance(u) +  v(1)
                 //if alt < dist[v]:               // A shorter path to v has been found
+              if(alt < distance(v(0)))
+              {
                     //dist[v] ← alt 
-                    //prev[v] ← u 
-                //end if
-            //end for
+                    //prev[v] ← u
+                  distance(v(0)) = alt
+                  previous(v(0)) = u
+              }
+              //end if   
+          //end for
+          }
         //end while
      }
         //return dist[], prev[]
-  
+  for(i <- distance)
+  {
+    println(i)
+  }
+  for(i <- previous)
+  {
+    println(i)
+  }
     //end function
 	println("Finished");
-  }
-  
-  
-  
-  
-  
-  /*def data() //testing 
-  {
-    println(instart + intarget)
-    //println(edges.mkString("\n"));
-    
-    
-      //Tests, learning to use maps
-    println((edges apply 2)("distance"));
-    var line1 = (edges apply 1)("startLocation")
-    println(line1);
-  }*/
-  
-  
+  } 
   
   
 }
