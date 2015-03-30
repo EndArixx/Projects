@@ -1,14 +1,15 @@
-package run
+package Jstanley
 
 import scala.io.Source
-import code.Dijkstras  //import algorithm
+//import Jstanley.Dijkstras  //import algorithm
 import scala.collection.mutable.Queue  
+import scala.collection.mutable.Stack
 
       //compile:    scalac *.scala
-      // run:       scala run.test 
+      // run:       scala Jstanley.run 
 
 
-object test {
+object run{
   def main(args: Array[String]) {
     //println("Wake up Neo!")
     
@@ -29,8 +30,8 @@ object test {
       case ex: Exception => println("Error: file \""+ input +"\" not found.")  
     }*/
     
-    //val start
-    //val target 
+    val start = 0;
+    val target = 11;
     
 
 
@@ -145,12 +146,21 @@ object test {
 
      
    val dijk = new Dijkstras()
-	 dijk.ShortestPath(graph, 0 ,total)
+   println("Calling: ShortestPath");
+	 val pathdata = dijk.ShortestPath(graph, start ,total)
+   println("Calling: Get Path");
+   val route = dijk.getPath(pathdata(1),start, target)
+   
+   for(i <- route)
+   {
+     print("[" +i+ "]");
+   }
+   println();
    
     
     
   
-  println("Closing");  
+  println("Closing Program");  
   }
 }
 

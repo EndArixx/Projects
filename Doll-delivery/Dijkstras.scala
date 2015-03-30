@@ -1,6 +1,8 @@
-package code 
+package Jstanley
 
 import scala.collection.mutable.Queue    
+import scala.collection.mutable.Stack
+
 
 /**
 * Dijkstra's Algorithm.
@@ -13,10 +15,39 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
 {
   //note: List[scala.collection.immutable.Map[String,Any]
       //function Dijkstra(Graph, source):
-  def ShortestPath(graph : Array[scala.collection.mutable.Queue[List[Int]]], source : Int, total : Int)
+  def getPath(previous : Array[Int], start : Int, target : Int) : Stack[Int] =
+  {
+    println("\n   Running: getPath");
+    var output = new Stack[Int]
+    var current = target
+    while(current != start)
+    {
+      if(current < 0)
+      {
+            //error!
+        output.push(-1)
+        return(output)
+      }
+      else
+      {
+        output.push(current)
+        current = previous(current)
+      }
+    }
+    output.push(current)
+    println("   Finished\n");
+    return(output)
+  }
+  
+  
+  
+  
+  
+  
+  def ShortestPath(graph : Array[scala.collection.mutable.Queue[List[Int]]], source : Int, total : Int) :  List[Array[Int]] =
   {
     
-		
+		println("\n   Running: Dijkstra's Shortest Path Algorithm")
     //Sudo code from Wikipedia
 			//    http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
@@ -53,7 +84,7 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
             //u ← vertex in Q with min dist[u]  // Source node in first case
           val u = Q.dequeue
             //remove u from Q 
-          println(graph(u)(0));
+
             //for each neighbor v of u:           // where v is still in Q.
           for(v <- graph(u))
           {
@@ -73,20 +104,26 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
           }
         //end while
      }
-        //return dist[], prev[]
+
   for(i <- distance)
   {
-    println(i)
+    print(i+",")
   }
+  println();
   for(i <- previous)
   {
-    println(i)
+    print(i+",")
   }
+  println();
+  
     //end function
-	println("Finished");
+	println("   Finished\n");
+
+  
+    //return dist[], prev[]
+  val output = List[Array[Int]] (distance, previous)
+  return(output)
   } 
-  
-  
 }
 
 
