@@ -9,38 +9,29 @@ import scala.collection.mutable.Queue
 */
 
 
-class Dijkstras(instart: String , intarget: String, inedges: List[scala.collection.immutable.Map[String,Any]])
+class Dijkstras()//instart: String , intarget: String, inedges: List[scala.collection.immutable.Map[String,Any]])
 {
   //note: List[scala.collection.immutable.Map[String,Any]
-  
-  
-  
-  var edges = inedges
-  var start = instart
-  var target = intarget
       //function Dijkstra(Graph, source):
-  def ShortestPath()//graph : Array[Int], source : Int)
+  def ShortestPath(graph : Array[scala.collection.mutable.Queue[List[Int]]], source : Int, total : Int)
   {
-		val graph = new Array[Int](2) //THIS NEEDS WORK
-		graph(0) = 0;
-		graph(1) = 1;
-	  val source = 0
+    
 		
     //Sudo code from Wikipedia
 			//    http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 
         //dist[source] ← 0                       // Distance from source to source
-		val distance = new Array[Int](graph.length)
+		val distance = new Array[Int](total)
     distance(source) = 0
 		
 		  //prev[source] ← undefined               // Previous node in optimal path initialization
-		val previous = new Array[Int](graph.length)  
+		val previous = new Array[Int](total)  
 		previous(source) = -1
     
     val Q = new Queue[Int]
     
         //for each vertex v in Graph:  // Initialization
-    for(v <- graph) //??
+    for(v <- 0 to total -1) //??
 		{
 			  //if v ≠ source            // Where v has not yet been removed from Q (unvisited nodes)
        if(v != source)
@@ -58,13 +49,13 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
     
         //while Q is not empty:
     while(Q.length > 0)
-    {
-        println(Q.dequeue)
-      
+    { 
             //u ← vertex in Q with min dist[u]  // Source node in first case
+        val u = Q.dequeue
             //remove u from Q 
             
             //for each neighbor v of u:           // where v is still in Q.
+        
                 //alt ← dist[u] + length(u, v)
                 //if alt < dist[v]:               // A shorter path to v has been found
                     //dist[v] ← alt 

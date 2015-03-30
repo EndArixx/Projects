@@ -2,7 +2,8 @@ package run
 
 import scala.io.Source
 import code.Dijkstras  //import algorithm
-    
+import scala.collection.mutable.Queue  
+
       //compile:    scalac *.scala
       // run:       scala run.test 
 
@@ -63,29 +64,93 @@ object test {
     )
     
     
+    val total = 12 //John look into this
+    
     val test = List(
-        List(1,5,9)
-        List(1,2,4)
-        List(1,6,18)
-        List(1,5,9)
+        List(1,5,9),
+        List(1,2,4),
+        List(1,6,18),
+        List(1,3,8),
+        List(3,4,7),
+        List(3,8,17),
+        List(2,8,13),
+        List(2,11,19),
+        List(2,6,14),
+        List(4,9,10),
+        List(4,10,11),
+        List(4,7,6),
+        List(6,5,19),
+        List(6,10,15),
+        List(6,12,14),
+        List(5,9,9),
+        List(5,10,12),
+        List(7,12,10),
+        List(7,11,9),
+        List(11,8,20),
+        List(11,10,12),
+        List(8,12,18),
+        List(10,9,3)
         )
+        
+        val graph = Array.ofDim[Queue[List[Int]]](total)
+        for(i <- 0 to (total-1))
+        {
+          graph(i) = new Queue[List[Int]]
+        }
+        for(i <- test)
+        {
+          graph(i(0)-1) += List((i(1)-1),i(2))
+            //Two way graph
+          graph(i(1)-1) += List((i(0)-1),i(2))
+        }
+        
+        /* TESING
+        for(i <- graph)
+        {
+          for(j <- i)
+          {
+            print(j)
+          }
+          println();
+        }*/
+        
+        
+        
+      /*  OUT DATED
+     val graph =Array.ofDim[Int](total,total)
+     for( i <- 0 to total -1)
+     {
+       for(j <- 0 to total -1)
+       {
+         graph(i)(j) = -1
+       }
+     }
+    
+     for(i <- test)
+     {
+       graph(i(0)-1)(i(1)-1) = i(2)
+       graph(i(1)-1)(i(0)-1) = i(2)
+       println((i(0)-1) +" "+(i(1)-1) +" "+ i(2));
+       
+     }
      
-    
-    
-        //print out list
-    //println(edges.mkString("\n"));
-       //choose a specific element
-    //println(edges apply 2);
-    
-          //test using muliple classes
-    //println(new Dijkstras data)
-    val dijk =  new Dijkstras("test" , "moretest", edges)
-    //dijk.data()
-	dijk.ShortestPath()
-    
-    
+     for( i <- 0 to total -1)
+     {
+       for(j <- 0 to total -1)
+       {
+             print("  " +graph(i)(j));
+       }
+       println();
+     }*/
 
+     
+   val dijk = new Dijkstras()
+	 dijk.ShortestPath(graph, 0 ,total)
+   
     
+    
+  
+  println("Closing");  
   }
 }
 
