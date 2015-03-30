@@ -64,6 +64,11 @@ object test {
     
     
     val test = List(
+        List(1,5,9)
+        List(1,2,4)
+        List(1,6,18)
+        List(1,5,9)
+        )
      
     
     

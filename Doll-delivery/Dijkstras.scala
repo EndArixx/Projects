@@ -56,9 +56,11 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
             //end for
      }
     
-    
-    
         //while Q is not empty:
+    while(Q.length > 0)
+    {
+        println(Q.dequeue)
+      
             //u ← vertex in Q with min dist[u]  // Source node in first case
             //remove u from Q 
             
@@ -70,11 +72,11 @@ class Dijkstras(instart: String , intarget: String, inedges: List[scala.collecti
                 //end if
             //end for
         //end while
-  
+     }
         //return dist[], prev[]
   
     //end function
-	println("Finished")
+	println("Finished");
   }
   
   
