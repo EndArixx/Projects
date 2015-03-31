@@ -4,40 +4,17 @@ import scala.io.Source
 //import Jstanley.Dijkstras  //import algorithm
 import scala.collection.mutable.Queue  
 import scala.collection.mutable.Stack
-
+import scala.collection.mutable
       //compile:    scalac *.scala
       // run:       scala Jstanley.run 
 
 
 object run{
-  def main(args: Array[String]) {
-    //println("Wake up Neo!")
-    
-    //val input = readLine("TEST: ")
-       
-    /*
-    val filename = input
-    try 
-    {
-        for(line <- Source.fromFile(filename).getLines())
-        {
-          println(line)
-          
-        }
-    }
-    catch
-    {
-      case ex: Exception => println("Error: file \""+ input +"\" not found.")  
-    }*/
-    
-    val start = 0;
-    val target = 11;
-    
-
-
-      
-    
-    
+  def main(args: Array[String]) 
+  {
+      //Make this input
+    val startloc = "Kruthika's abode"
+    val targetloc = "Craig's haunt" 
     val edges = List(
       Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Mark's crib", "distance" -> 9),
       Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Greg's casa", "distance" -> 4),
@@ -65,84 +42,48 @@ object run{
     )
     
     
-    val total = 12 //John look into this
     
-    val test = List(
-        List(1,5,9),
-        List(1,2,4),
-        List(1,6,18),
-        List(1,3,8),
-        List(3,4,7),
-        List(3,8,17),
-        List(2,8,13),
-        List(2,11,19),
-        List(2,6,14),
-        List(4,9,10),
-        List(4,10,11),
-        List(4,7,6),
-        List(6,5,19),
-        List(6,10,15),
-        List(6,12,14),
-        List(5,9,9),
-        List(5,10,12),
-        List(7,12,10),
-        List(7,11,9),
-        List(11,8,20),
-        List(11,10,12),
-        List(8,12,18),
-        List(10,9,3)
-        )
-        
-        val graph = Array.ofDim[Queue[List[Int]]](total)
-        for(i <- 0 to (total-1))
-        {
-          graph(i) = new Queue[List[Int]]
-        }
-        for(i <- test)
-        {
-          graph(i(0)-1) += List((i(1)-1),i(2))
-            //Two way graph
-          graph(i(1)-1) += List((i(0)-1),i(2))
-        }
-        
-        /* TESING
-        for(i <- graph)
-        {
-          for(j <- i)
-          {
-            print(j)
-          }
-          println();
-        }*/
-        
-        
-        
-      /*  OUT DATED
-     val graph =Array.ofDim[Int](total,total)
-     for( i <- 0 to total -1)
-     {
-       for(j <- 0 to total -1)
-       {
-         graph(i)(j) = -1
-       }
-     }
+    var locations = mutable.Map.empty[String,Int]
+    var counter = 0
+       //build the List
+    for(v <- edges)
+    {
+      
+      if(!(locations.contains(""+v("startLocation"))))
+      {
+        locations(""+v("startLocation")) = (counter)
+        counter += 1
+      }
+      if(!(locations.contains(""+v("endLocation"))))
+      {
+        locations(""+v("endLocation")) = (counter)
+        counter += 1
+      }
+    }
     
-     for(i <- test)
-     {
-       graph(i(0)-1)(i(1)-1) = i(2)
-       graph(i(1)-1)(i(0)-1) = i(2)
-       println((i(0)-1) +" "+(i(1)-1) +" "+ i(2));
-       
-     }
-     
-     for( i <- 0 to total -1)
-     {
-       for(j <- 0 to total -1)
-       {
-             print("  " +graph(i)(j));
-       }
-       println();
-     }*/
+    val start = locations("Kruthika's abode")
+    val target = locations("Craig's haunt")
+    
+    val verts = new Queue[List[Int]]
+    for(v <- edges)
+    {
+      var i : Int = v("distance").asInstanceOf[Int]
+      
+      verts += List( locations(""+v("startLocation")), locations(""+v("endLocation")),i)
+    }
+    
+    val total = counter
+    val graph = Array.ofDim[Queue[List[Int]]](total)
+    for(i <- 0 to (total-1))
+    {
+      graph(i) = new Queue[List[Int]]
+    }
+    for(i <- verts)
+    {
+      graph(i(0)) += List((i(1)),i(2))
+        //Two way graph
+      graph(i(1)) += List((i(0)),i(2))
+    }
 
      
    val dijk = new Dijkstras()
@@ -151,14 +92,14 @@ object run{
    println("Calling: Get Path");
    val route = dijk.getPath(pathdata(1),start, target)
    
+   
+   var revloc = locations.map(_.swap)
    for(i <- route)
    {
-     print("[" +i+ "]");
+     print("[" +revloc(i)+ "] ");
    }
    println();
-   
-    
-    
+  
   
   println("Closing Program");  
   }

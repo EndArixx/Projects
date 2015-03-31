@@ -11,9 +11,8 @@ import scala.collection.mutable.Stack
 */
 
 
-class Dijkstras()//instart: String , intarget: String, inedges: List[scala.collection.immutable.Map[String,Any]])
+class Dijkstras()
 {
-  //note: List[scala.collection.immutable.Map[String,Any]
       //function Dijkstra(Graph, source):
   def getPath(previous : Array[Int], start : Int, target : Int) : Stack[Int] =
   {
@@ -105,7 +104,7 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
         //end while
      }
 
-  for(i <- distance)
+  /*for(i <- distance)
   {
     print(i+",")
   }
@@ -115,7 +114,7 @@ class Dijkstras()//instart: String , intarget: String, inedges: List[scala.colle
     print(i+",")
   }
   println();
-  
+  */
     //end function
 	println("   Finished\n");
 
