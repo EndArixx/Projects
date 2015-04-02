@@ -39,8 +39,39 @@ class Dijkstras()
       }
     }
     
-    val start = locations("Kruthika's abode")
-    val target = locations("Craig's haunt")
+  
+    
+    var start = 0
+       //this checks to make sure that the start is in the graph
+    try
+    {          
+       start = locations(startloc)
+    } catch {
+      case e: Exception =>
+         val output =  mutable.Map.empty[String,Any]
+         output("path") = "Start: \"" +startloc+ "\" is not located in the Graph.";
+         output("distance") = (-1)
+         println("Error: Closing Program\n\n");  
+         return(output);
+    }
+    
+    var target = 0
+      //this checks to make sure that the target is in the graph
+    try
+    {          
+       target = locations(targetloc)
+    } catch {
+      case e: Exception =>
+         val output =  mutable.Map.empty[String,Any]
+         output("path") = "Target: \"" +targetloc+ "\" is not located in the Graph.";
+         output("distance") = (-1)
+         println("Error: Closing Program\n\n");  
+         return(output);
+    }
+    
+    
+    
+    
     
     val verts = new Queue[List[Int]]
     for(v <- edges)
@@ -69,7 +100,16 @@ class Dijkstras()
    val pathdata = shortestPath(graph, start ,total)
    println("Calling: Get Path");
    val route = getPath(pathdata(1),start, target)
-   
+
+     //Error handling for an incomplete path
+   if(route.top == -1)
+   {
+         val output =  mutable.Map.empty[String,Any]
+         output("path") = "Target: \"" +targetloc+ "\" is not connected to \"" +startloc+ "\" in the Graph.";
+         output("distance") = (-1)
+         println("Error: Closing Program\n\n");  
+         return(output);
+   }
    
    var revloc = locations.map(_.swap)
    
@@ -100,7 +140,7 @@ class Dijkstras()
     {
       if(current < 0)
       {
-            //error!
+            //This will trigger if there is no path to the source
         output.push(-1)
         return(output)
       }
@@ -237,8 +277,35 @@ object run
       Map("startLocation" -> "Cam's dwelling", "endLocation" -> "Craig's haunt", "distance" -> 18),
       Map("startLocation" -> "Nathan's flat", "endLocation" -> "Kirk's farm", "distance" -> 3)
     )
+    
+    
+     val test = List(
+      Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Mark's crib", "distance" -> 9),
+      Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Greg's casa", "distance" -> 4),
+     // Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Matt's pad", "distance" -> 18),
+      Map("startLocation" -> "Kruthika's abode", "endLocation" -> "Brian's apartment", "distance" -> 8),
+      Map("startLocation" -> "Brian's apartment", "endLocation" -> "Wesley's condo", "distance" -> 7),
+      Map("startLocation" -> "Brian's apartment", "endLocation" -> "Cam's dwelling", "distance" -> 17),
+      Map("startLocation" -> "Greg's casa", "endLocation" -> "Cam's dwelling", "distance" -> 13),
+      Map("startLocation" -> "Greg's casa", "endLocation" -> "Mike's digs", "distance" -> 19),
+      //Map("startLocation" -> "Greg's casa", "endLocation" -> "Matt's pad", "distance" -> 14),
+      Map("startLocation" -> "Wesley's condo", "endLocation" -> "Kirk's farm", "distance" -> 10),
+      Map("startLocation" -> "Wesley's condo", "endLocation" -> "Nathan's flat", "distance" -> 11),
+      Map("startLocation" -> "Wesley's condo", "endLocation" -> "Bryce's den", "distance" -> 6),
+     // Map("startLocation" -> "Matt's pad", "endLocation" -> "Mark's crib", "distance" -> 19),
+     // Map("startLocation" -> "Matt's pad", "endLocation" -> "Nathan's flat", "distance" -> 15),
+       Map("startLocation" -> "Matt's pad", "endLocation" -> "Craig's haunt", "distance" -> 14),
+      Map("startLocation" -> "Mark's crib", "endLocation" -> "Kirk's farm", "distance" -> 9),
+      Map("startLocation" -> "Mark's crib", "endLocation" -> "Nathan's flat", "distance" -> 12),
+      //Map("startLocation" -> "Bryce's den", "endLocation" -> "Craig's haunt", "distance" -> 10),
+      Map("startLocation" -> "Bryce's den", "endLocation" -> "Mike's digs", "distance" -> 9),
+      Map("startLocation" -> "Mike's digs", "endLocation" -> "Cam's dwelling", "distance" -> 20),
+      Map("startLocation" -> "Mike's digs", "endLocation" -> "Nathan's flat", "distance" -> 12),
+      //Map("startLocation" -> "Cam's dwelling", "endLocation" -> "Craig's haunt", "distance" -> 18),
+      Map("startLocation" -> "Nathan's flat", "endLocation" -> "Kirk's farm", "distance" -> 3)
+    )
     val dijk = new Dijkstras()
-    val result = dijk.runDijkstra(startloc, targetloc, edges)
+    val result = dijk.runDijkstra(startloc, targetloc, test)
     println("Distance: " + result("distance") +" \nPath: "+ result("path"))
   }
 }
