@@ -4,6 +4,7 @@ Dijkstra's Algorithm:
 
 
 Function
+(Make sure to import Jstanley.Dijkstras )  
 	Call: 
 		Jstanley.Dijkstras.run
 		(
@@ -27,3 +28,6 @@ Test Run:
     Compile	: scalac Dijkstras.scala
 
     Execute	: scala Jstanley.run
+
+
+for an example of its use please see the main() at the bottom of the file.
