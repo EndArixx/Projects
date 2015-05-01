@@ -5,8 +5,16 @@ public class run
 	{
 		/*- create new thread for server (listen_thread)
 		      - start server to listen on tcp port 9090
-		- on every incoming request, move request to its own new thread, say request_handler thread, so listen_thread is back to listening
-		- For incoming requests, the request_handler thread waits for a string to be sent terminated by newline, for eg. "Hello World!\n" and the server then responds with string "ACK:" plus the original message, for eg. "ACK:Hello World!"
+		- on every incoming request, move request to its
+		 own new thread, say request_handler thread,
+		  so listen_thread is back to listening
+		  
+		- For incoming requests,
+		 the request_handler thread waits for a string
+		  to be sent terminated by newline, 
+		  for eg. "Hello World!\n" and the server then 
+		  responds with string "ACK:" plus the original message,
+		  for eg. "ACK:Hello World!"
 		     	
 		- while (true) {
 		- create client and establish a tcp connection to server listening on port 9090 locally
