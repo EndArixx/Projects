@@ -6,6 +6,26 @@ import java.util.Date;
 import java.util.Random;
 
 
+/*
+ * Java exercise on threading and socket programming
+ * 
+main() {
+	- create new thread for server (listen_thread)
+    - start server to listen on tcp port 9090
+	- on every incoming request, move request to its own new thread, say request_handler thread, so listen_thread is back to listening
+	- For incoming requests, the request_handler thread waits for a string to be sent terminated by newline, for eg. "Hello World!\n" and the server then responds with string "ACK:" plus the original message, for eg. "ACK:Hello World!"
+	  
+	- while (true) {
+  		- create client and establish a tcp connection to server listening on port 9090 locally
+		- Send a timestamp string of form "yyyy-MM-dd HH:mm:ss" followed by newline character
+		- Print to console what was sent and response from server, on separate lines.
+		- send a message to server of form "Request-XX" where XX should be a random number between 00 and 99
+		- print what was sent and response from server, on separate lines.
+		- close connection to server	
+    }
+  } */
+
+
 public class JStanleyPort
 {
 	public static boolean debug = false;
@@ -106,16 +126,9 @@ public class JStanleyPort
 			    {
 	    				//establish a server socket monitoring port 9090
 			    	serversocket = new ServerSocket(9090);
-			    	long startTime = System.currentTimeMillis();
-			    	long currentTime;
+			    	
 			    	while(true)
 			    	{
-			    		currentTime   = System.currentTimeMillis();
-			    		if(currentTime - startTime >= 1000)
-			    		{
-			    			if(debug){System.out.println("[" + (currentTime - startTime) +"]");}
-			    			break;
-			    		}
 					      	//wait for client
 					    if((socket = serversocket.accept()) != null)
 					    {
@@ -165,7 +178,7 @@ public class JStanleyPort
 		int serverport = 9090;
 		try 
 		{
-		    for(int i = 0; i < 10; i++)
+		    for(int i = 0; i < 10000; i++)
 		    {
 				//- create client and establish a tcp connection to server listening on port 9090 locally
 		
