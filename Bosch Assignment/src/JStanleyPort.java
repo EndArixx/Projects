@@ -25,7 +25,21 @@ main() {
     }
   } */
 
-
+/*
+ * Testing
+ * 
+ * This program was written with Eclipse - Luna and tested on the following computers
+ * 
+ * Windows 7 Professional 
+ * 		AMD FX(tm)-4100 Quad-Core Porcessor 3.60 GHz
+ * 		8 GB of RAM
+ * 
+ * Ubuntu 14.04
+ * 		dell studio 15 
+ * 		Intel core i5 
+ * 		8 GB of RAM
+ * 	
+ */
 public class JStanleyPort
 {
 		//This is for debugging.
@@ -195,11 +209,18 @@ public class JStanleyPort
 		try 
 		{
 				//while(true)
-				//	this is dangerous but the specifications asked for it.
-		    for(int i = 0; i < 1000000; i++)
+				//	This is dangerous but the specifications asked for it.
+				//  The program will run until closed external. 
+				//	The psudo code never called for an exit condition. 
+				//	This is dangerous because the program may have issues when it is closed externally, so use with caution.
+				//	For testing I used "for(int i = 0; i < 1000000; i++)" The program successfully reached one million completions.
+			while(true)
 		    {
+				
 		    	long start = System.nanoTime();
-		    	long wait = 10000000;
+		    		//This ensure that the sockets have enough time for the operation system to free the socket
+		    		//It is currently set to 8 milliseconds.
+		    	long wait = 8000000;
 		    	
 		    	
 					//- create client and establish a tcp connection to server listening on port 9090 locally
@@ -253,18 +274,31 @@ public class JStanleyPort
 			    System.out.println(line);
 			    			    
 			    	//- close connection to server
-			    	//	close all readers,writers and the socket.
+			    	//	close all readers, writers and the socket.
 			    if(debug){System.out.println("  Client Closing connection.");}
 			    bufferedReader.close();
 			    inputStreamReader.close();
 			    printWriter.close();
 			    socket.close();
+			    
 			    while(System.nanoTime() < start + wait)
 			    {
-			    	//when testing on a Windows 7 AMD FX(tm)-4100 Quad-core processor 
-			    	//the program ran to quickly and the operating system could not free sockets 
-			    	//fast enough for the program. so it had to be slowed down.
-			    	//this was done by ensuring the program would always take at least 10 milliseconds.
+			    	/*
+			    	when testing on a Windows 7 AMD FX(tm)-4100 Quad-core processor 
+			    	the program ran to quickly and the operating system could not free sockets 
+			    	fast enough for the program. so it had to be slowed down.
+			    	this was done by ensuring the program would always take at least 8 milliseconds.
+			    	
+			    	this problem is because the operating system doesnt instantly free up the socket's
+			    	memory when it is closed so even though they have been closed the memory isn't ready for reuse quite yet
+			    	
+			   		This can be modified by changing the wait time to accommodate different operating systems.
+			   		
+			   		if they program is crashing with the following message:
+			   		IOException: No buffer space available (maximum connections reached?)
+			   		then it is running too fast and needs to be slowed down to match the operating system. 
+			   		this can be done by increasing the wait time. 
+			    	*/
 			    }
 		    }
 		    
