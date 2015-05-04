@@ -4,6 +4,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+/*
+ * This Program was written by John Mark Stanley
+ */
+
 
 
 /*
@@ -31,13 +35,15 @@ main() {
  * This program was written with Eclipse - Luna and tested on the following computers
  * 
  * Windows 7 Professional 
- * 		AMD FX(tm)-4100 Quad-Core Porcessor 3.60 GHz
+ * 		AMD FX(tm)-4100 Quad-Core Processor 3.60 GHz
  * 		8 GB of RAM
+ * 		GeForce GTX 560 Ti
  * 
- * Ubuntu 14.04
- * 		dell studio 15 
+ * Linux - Ubuntu 14.04
+ * 		dell studio 1556 
  * 		Intel core i5 
  * 		8 GB of RAM
+ * 		ATI Radeon HD5470
  * 	
  */
 public class JStanleyPort
@@ -45,8 +51,9 @@ public class JStanleyPort
 		//This is for debugging.
 		//when set to true the program will print out useful information to the console. 
 		//things like threads starting and closing
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
+		//This is the Request_handler it recives a socket then takes a given string and returns ACK + string.
 	class request_handler implements Runnable
 	{
 		private String name;
@@ -119,7 +126,7 @@ public class JStanleyPort
 		}
 		
 	}
-	
+		//This monitors port 9090 then once something connects it creates a new thread of a request handler.
 	class listen_thread implements Runnable
 	{
 		private String name;
