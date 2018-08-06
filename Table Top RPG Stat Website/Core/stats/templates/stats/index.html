@@ -1,0 +1,9 @@
+{% if topTenGroups %}
+    <ul>
+    {% for Group in topTenGroups %}
+        <li><a href="group/{{ Group.GID }}">{{ Group.Group_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Groups are available.</p>
+{% endif %}

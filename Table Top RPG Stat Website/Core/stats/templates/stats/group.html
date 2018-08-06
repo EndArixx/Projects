@@ -1,0 +1,14 @@
+
+{% if chractersInGroup %}
+    <ul>
+    {% for Character in chractersInGroup %}
+        <hi><p style="font-size:50px;"><b>{{ Character.Character_Name }}</b></p></h1>
+		<ul>
+		<li><a href="../CharacterSheet/{{ Character.CID }}">CharacterSheet</a></li>
+		<li> other stats </li>
+		</ul>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No characters are available.</p>
+{% endif %}
