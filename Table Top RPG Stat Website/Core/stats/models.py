@@ -88,7 +88,7 @@ class Character_HP(models.Model):
 	Left_Leg_HP = models.IntegerField(default=Max_Left_Leg_HP.default)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
-		return self.CID
+		return self.CID.Character_Name
 	
 class War_Crime(models.Model):
 	War_Crime_ID =  models.AutoField(primary_key=True)
