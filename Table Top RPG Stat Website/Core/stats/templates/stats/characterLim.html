@@ -1,15 +1,13 @@
- <ul><p>CONTROL DENIED</p> </ul>
+<ul><p>CONTROL DENIED</p> </ul>
 {% if chractersInGroup %}
     <ul>
-    {% for Character in chractersInGroup %}
-        <li>{{userNamePass}}
-			{{ Character.Character_Name }}
-			{{ Character.MIND_stat }}
-			{{ Character.FIST_stat }}
-			{{ Character.EYES_stat }}
-			{{ Character.FACE_stat }}
-		</li>
-    {% endfor %}
+			<p><b> Name: {{ chractersInGroup.Character_Name }} </b></p>
+			<hr>
+			<p> Mind: {{ chractersInGroup.MIND_stat }} </p>
+			<p> Fist: {{ chractersInGroup.FIST_stat }} </p>
+			<p> Eyes: {{ chractersInGroup.EYES_stat }} </p>
+			<p> Face: {{ chractersInGroup.FACE_stat }} </p>
+			<p> Heart: {{ chractersInGroup.HEART_stat }} </p>
     </ul>
 {% else %}
     <p>No characters are available.</p>

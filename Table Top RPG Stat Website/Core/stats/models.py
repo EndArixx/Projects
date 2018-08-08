@@ -74,7 +74,7 @@ class Character_HP(models.Model):
 	#Charater ID
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
 	#Max allowed HP per slot
-	MAX_Head_HP = models.IntegerField(default=25)
+	Max_Head_HP = models.IntegerField(default=25)
 	Max_Core_HP = models.IntegerField(default=50)
 	Max_Right_Arm_HP = models.IntegerField(default=30)
 	Max_Left_Arm_HP = models.IntegerField(default=30)
@@ -82,7 +82,7 @@ class Character_HP(models.Model):
 	Max_Left_Leg_HP = models.IntegerField(default=30)
 	
 	#Current HP per slot
-	Head_HP = models.IntegerField(default=MAX_Head_HP.default)
+	Head_HP = models.IntegerField(default=Max_Head_HP.default)
 	Core_HP = models.IntegerField(default=Max_Core_HP.default)
 	Right_Arm_HP = models.IntegerField(default=Max_Right_Arm_HP.default)
 	Left_Arm_HP = models.IntegerField(default=Max_Left_Arm_HP.default)
