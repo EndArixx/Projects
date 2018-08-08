@@ -17,6 +17,7 @@ IMPORTANT Identifiers/ForeignKeys:
 	TUID = Tank Upgrade ID
 '''
 
+
 '''
 This is the ID of the Actually player, this is used when the player logs in.
 '''
@@ -68,6 +69,7 @@ class Character(models.Model):
 	def __str__(self):
 		return self.Character_Name
 
+		
 class Character_HP(models.Model):
 	#Charater ID
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
@@ -99,4 +101,10 @@ class War_Crime(models.Model):
 		return self.War_Crime_Name
 	
 	
-
+class character_Access(models.Model):
+	username =  models.CharField(max_length=200)
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	HasAccess = models.BooleanField(default = False)
+	HasEdit = models.BooleanField(default = False)
+	def __str__(self):
+		return self.username +' - '+ self.CID.Character_Name

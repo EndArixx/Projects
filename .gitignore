@@ -1,3 +1,4 @@
 
 *.pyc
 Table Top RPG Stat Website/Core/CoreCityStats.sqlite3
+Table Top RPG Stat Website/Core/stats/migrations
