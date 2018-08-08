@@ -1,6 +1,7 @@
 # Table Top RPG Stat Website
 The goal of this project is to create a website with Django (python) that players will be able to user to see stats in real time while playing a tabletop RPG over the internet.
 
+
 techology used:
 	https://www.djangoproject.com/
 
