@@ -41,7 +41,9 @@ class Group(models.Model):
 	notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Group_name
-	
+#-------------------------------------------------------------------	
+#-------------------------Character Zone----------------------------
+#-------------------------------------------------------------------	
 '''
 These are specific charcters each character must have a Group and a player. 
 
@@ -69,37 +71,30 @@ class Character(models.Model):
 	def __str__(self):
 		return self.Character_Name
 
-		
+'''
+HP of the player
+'''		
 class Character_HP(models.Model):
 	#Charater ID
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
-	#Max allowed HP per slot
+		#Max allowed HP per slot
 	Max_Head_HP = models.IntegerField(default=25)
 	Max_Core_HP = models.IntegerField(default=50)
 	Max_Right_Arm_HP = models.IntegerField(default=30)
 	Max_Left_Arm_HP = models.IntegerField(default=30)
 	Max_Right_Leg_HP = models.IntegerField(default=30)
 	Max_Left_Leg_HP = models.IntegerField(default=30)
-	
-	#Current HP per slot
+		#Current HP per slot
 	Head_HP = models.IntegerField(default=Max_Head_HP.default)
 	Core_HP = models.IntegerField(default=Max_Core_HP.default)
 	Right_Arm_HP = models.IntegerField(default=Max_Right_Arm_HP.default)
 	Left_Arm_HP = models.IntegerField(default=Max_Left_Arm_HP.default)
 	Right_Leg_HP = models.IntegerField(default=Max_Right_Leg_HP.default)
 	Left_Leg_HP = models.IntegerField(default=Max_Left_Leg_HP.default)
+		#Misc
 	notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.CID.Character_Name
-	
-class War_Crime(models.Model):
-	War_Crime_ID =  models.AutoField(primary_key=True)
-	War_Crime_Name =  models.CharField(max_length=200)
-	GID = models.ForeignKey(Group, on_delete=models.CASCADE) 
-	notes = models.CharField(max_length=2000,blank=True, null=True)
-	def __str__(self):
-		return self.War_Crime_Name
-	
 	
 class character_Access(models.Model):
 	username =  models.CharField(max_length=200)
@@ -108,3 +103,103 @@ class character_Access(models.Model):
 	HasEdit = models.BooleanField(default = False)
 	def __str__(self):
 		return self.username +' - '+ self.CID.Character_Name
+
+#-------------------------------------------------------------------			
+#---------------------------Armor Zone -----------------------------
+#-------------------------------------------------------------------	
+class Armor(models.Model):
+	AID = models.AutoField(primary_key=True)
+	Name =  models.CharField(max_length=200)
+	Value = models.IntegerField(default=10)
+	Special_Feature =  models.CharField(max_length=2000,blank=True, null=True)
+	Allow_Head = models.BooleanField(default = True)
+	Allow_Core = models.BooleanField(default = True)
+	Allow_Right_Arm = models.BooleanField(default = True)
+	Allow_Left_Arm = models.BooleanField(default = True)
+	Allow_Right_Leg = models.BooleanField(default = True)
+	Allow_Left_Leg = models.BooleanField(default = True)
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.Name
+	
+class Character_Equipped_Armor(models.Model):
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	AID = models.OneToOneField(Armor, on_delete=models.CASCADE) 
+	Equiped_Head = models.BooleanField(default = True)
+	Equiped_Core = models.BooleanField(default = True)
+	Equiped_Right_Arm = models.BooleanField(default = True)
+	Equiped_Left_Arm = models.BooleanField(default = True)
+	Equiped_Right_Leg = models.BooleanField(default = True)
+	Equiped_Left_Leg = models.BooleanField(default = True)
+	class Meta:
+		unique_together = (('CID', 'AID'),)
+	def __str__(self):
+		return self.CID.Character_Name + ' - '+ self.AID.Name
+		
+class Character_Equipped_Armor_Value(models.Model):
+		#Charater ID
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
+		#Max allowed HP per slot
+	Max_Head_Armor = models.IntegerField(default=0)
+	Max_Core_Armor = models.IntegerField(default=0)
+	Max_Right_Arm_Armor = models.IntegerField(default=0)
+	Max_Left_Arm_Armor = models.IntegerField(default=0)
+	Max_Right_Leg_Armor = models.IntegerField(default=0)
+	Max_Left_Leg_Armor = models.IntegerField(default=0)
+		#Current HP per slot
+	Head_Armor = models.IntegerField(default=Max_Head_Armor.default)
+	Core_Armor = models.IntegerField(default=Max_Core_Armor.default)
+	Right_Arm_Armor = models.IntegerField(default=Max_Right_Arm_Armor.default)
+	Left_Arm_Armor = models.IntegerField(default=Max_Left_Arm_Armor.default)
+	Right_Leg_Armor = models.IntegerField(default=Max_Right_Leg_Armor.default)
+	Left_Leg_Armor = models.IntegerField(default=Max_Left_Leg_Armor.default)
+		#Misc
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.CID.Character_Name
+
+#-------------------------------------------------------------------			
+#--------------------------- Weapon Zone ---------------------------
+#-------------------------------------------------------------------		
+
+#-------------------------------------------------------------------	
+#------------------------------ Skills -----------------------------
+#-------------------------------------------------------------------	
+
+#-------------------------------------------------------------------			
+#----------------------------- Item Zone ---------------------------
+#-------------------------------------------------------------------
+
+class Item(models.Model):
+	IID = models.AutoField(primary_key=True)
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	Name =  models.CharField(max_length=200,blank=True, null=True)
+	Count = models.IntegerField(default=1)
+	Description =  models.CharField(max_length=2000,blank=True, null=True)
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.CID.Character_Name + ' - '+ self.Name
+
+#-------------------------------------------------------------------	
+#------------------------------ NPC --------------------------------
+#-------------------------------------------------------------------	
+		
+#-------------------------------------------------------------------	
+#----------------------------- MISC --------------------------------
+#-------------------------------------------------------------------	
+class War_Crime(models.Model):
+	War_Crime_ID =  models.AutoField(primary_key=True)
+	War_Crime_Name =  models.CharField(max_length=200)
+	GID = models.ForeignKey(Group, on_delete=models.CASCADE) 
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.War_Crime_Name	
+		
+		
+		
+		
+		
+		
+		
+		
+		
