@@ -131,8 +131,8 @@ class Character_Equipped_Armor(models.Model):
 	Equiped_Left_Arm = models.BooleanField(default = True)
 	Equiped_Right_Leg = models.BooleanField(default = True)
 	Equiped_Left_Leg = models.BooleanField(default = True)
-	class Meta:
-		unique_together = (('CID', 'AID'),)
+	# class Meta:
+		# unique_together = (('CID', 'AID'),)
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.AID.Name
 		
@@ -166,6 +166,16 @@ class Character_Equipped_Armor_Value(models.Model):
 #------------------------------ Skills -----------------------------
 #-------------------------------------------------------------------	
 
+class Skill(models.Model):
+	SID = models.AutoField(primary_key=True)
+	name =  models.CharField(max_length=200,blank=True, null=True)
+	Cost = models.IntegerField(default=2)
+	
+class Character_Skill(models.Model):
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	SID = models.OneToOneField(Skill, on_delete=models.CASCADE) 
+	Mod = models.IntegerField(default=2)
+
 #-------------------------------------------------------------------			
 #----------------------------- Item Zone ---------------------------
 #-------------------------------------------------------------------
@@ -173,7 +183,7 @@ class Character_Equipped_Armor_Value(models.Model):
 class Item(models.Model):
 	IID = models.AutoField(primary_key=True)
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
-	Name =  models.CharField(max_length=200,blank=True, null=True)
+	Name =  models.CharField(max_length=200)
 	Count = models.IntegerField(default=1)
 	Description =  models.CharField(max_length=2000,blank=True, null=True)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
