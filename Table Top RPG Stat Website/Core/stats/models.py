@@ -7,6 +7,7 @@ IMPORTANT Identifiers/ForeignKeys:
 	CID = Character ID
 	GID = Group ID
 	FID = Faction ID
+	STID = Stat ID
 	SID = Skill ID
 	--items--
 	WID = Weapon ID
@@ -166,15 +167,42 @@ class Character_Equipped_Armor_Value(models.Model):
 #------------------------------ Skills -----------------------------
 #-------------------------------------------------------------------	
 
+class Stat(models.Model):
+	STID = models.AutoField(primary_key=True)
+	Name =  models.CharField(max_length=200,blank=True, null=True)
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.Name
+		
+class Character_Stat(models.Model):
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	STID =  models.OneToOneField(Stat, on_delete=models.CASCADE) 
+	Value = models.IntegerField(default=0)
+	# class Meta:
+		# unique_together = ('CID', 'STID')
+		
+	def __str__(self):
+		return self.CID.Character_Name + ' - '+ self.STID.Name
+	
 class Skill(models.Model):
 	SID = models.AutoField(primary_key=True)
-	name =  models.CharField(max_length=200,blank=True, null=True)
+	STID =  models.OneToOneField(Stat, on_delete=models.CASCADE) 
+	Name =  models.CharField(max_length=200,blank=True, null=True)
 	Cost = models.IntegerField(default=2)
-	
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.Name
+		
 class Character_Skill(models.Model):
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
 	SID = models.OneToOneField(Skill, on_delete=models.CASCADE) 
 	Mod = models.IntegerField(default=2)
+	notes = models.CharField(max_length=2000,blank=True, null=True)
+	# class Meta:
+		# unique_together = ('CID', 'SID')
+		
+	def __str__(self):
+		return self.CID.Character_Name + ' - '+ self.SID.Name
 
 #-------------------------------------------------------------------			
 #----------------------------- Item Zone ---------------------------
@@ -187,6 +215,9 @@ class Item(models.Model):
 	Count = models.IntegerField(default=1)
 	Description =  models.CharField(max_length=2000,blank=True, null=True)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
+	# class Meta:
+		# unique_together = (('IID', 'CID'),)
+		
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.Name
 
