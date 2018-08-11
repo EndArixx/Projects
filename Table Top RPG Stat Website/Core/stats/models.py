@@ -124,16 +124,16 @@ class Armor(models.Model):
 		return self.Name
 	
 class Character_Equipped_Armor(models.Model):
-	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
-	AID = models.OneToOneField(Armor, on_delete=models.CASCADE) 
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
+	AID = models.ForeignKey(Armor, on_delete=models.CASCADE) 
 	Equiped_Head = models.BooleanField(default = True)
 	Equiped_Core = models.BooleanField(default = True)
 	Equiped_Right_Arm = models.BooleanField(default = True)
 	Equiped_Left_Arm = models.BooleanField(default = True)
 	Equiped_Right_Leg = models.BooleanField(default = True)
 	Equiped_Left_Leg = models.BooleanField(default = True)
-	# class Meta:
-		# unique_together = (('CID', 'AID'),)
+	class Meta:
+		unique_together = (('CID', 'AID'),)
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.AID.Name
 		
@@ -175,18 +175,18 @@ class Stat(models.Model):
 		return self.Name
 		
 class Character_Stat(models.Model):
-	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
-	STID =  models.OneToOneField(Stat, on_delete=models.CASCADE) 
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
+	STID =  models.ForeignKey(Stat, on_delete=models.CASCADE) 
 	Value = models.IntegerField(default=0)
-	# class Meta:
-		# unique_together = ('CID', 'STID')
+	class Meta:
+		unique_together = ('CID', 'STID')
 		
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.STID.Name
 	
 class Skill(models.Model):
 	SID = models.AutoField(primary_key=True)
-	STID =  models.OneToOneField(Stat, on_delete=models.CASCADE) 
+	STID =  models.ForeignKey(Stat, on_delete=models.CASCADE) 
 	Name =  models.CharField(max_length=200,blank=True, null=True)
 	Cost = models.IntegerField(default=2)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
@@ -194,12 +194,12 @@ class Skill(models.Model):
 		return self.Name
 		
 class Character_Skill(models.Model):
-	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
-	SID = models.OneToOneField(Skill, on_delete=models.CASCADE) 
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
+	SID = models.ForeignKey(Skill, on_delete=models.CASCADE) 
 	Mod = models.IntegerField(default=2)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
-	# class Meta:
-		# unique_together = ('CID', 'SID')
+	class Meta:
+		unique_together = ('CID', 'SID')
 		
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.SID.Name
@@ -210,14 +210,12 @@ class Character_Skill(models.Model):
 
 class Item(models.Model):
 	IID = models.AutoField(primary_key=True)
-	CID = models.OneToOneField(Character, on_delete=models.CASCADE) 
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
 	Name =  models.CharField(max_length=200)
 	Count = models.IntegerField(default=1)
 	Description =  models.CharField(max_length=2000,blank=True, null=True)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
-	# class Meta:
-		# unique_together = (('IID', 'CID'),)
-		
+
 	def __str__(self):
 		return self.CID.Character_Name + ' - '+ self.Name
 
