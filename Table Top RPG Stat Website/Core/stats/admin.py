@@ -26,39 +26,49 @@ admin.site.register(Character_Equipped_Armor_Value)
 from .models import  Weapon_Range
 from .models import  Weapon_Ammo
 from .models import  Weapon
-from .models import  Weapon_Character
+from .models import  Character_Weapon
 admin.site.register(Weapon_Range)
 admin.site.register(Weapon_Ammo)
 admin.site.register(Weapon)
-admin.site.register(Weapon_Character)
+admin.site.register(Character_Weapon)
 
 #Stat & Skill
 from .models import  Stat
 from .models import  Character_Stat
 from .models import  Skill
 from .models import  Character_Skill
-from .models import  Character_Meta
+from .models import  Character_Power
 admin.site.register(Stat)
 admin.site.register(Character_Stat)
 admin.site.register(Skill)
 admin.site.register(Character_Skill)
-admin.site.register(Character_Meta)
+admin.site.register(Character_Power)
 
 #Item
-from .models import  Item
+from .models import  Character_Item
+from .models import  Group_Item
 from .models import  Vehicle
-from .models import  Vehicle_Upgrade
-admin.site.register(Item)
+from .models import  Character_Vehicle
+from .models import  Group_Vehicle
+from .models import  Character_Vehicle_Feature
+from .models import  Group_Vehicle_Feature
+admin.site.register(Character_Item)
+admin.site.register(Group_Item)
 admin.site.register(Vehicle)
-admin.site.register(Vehicle_Upgrade)
+admin.site.register(Character_Vehicle)
+admin.site.register(Group_Vehicle)
+admin.site.register(Character_Vehicle_Feature)
+admin.site.register(Group_Vehicle_Feature)
 
 #Status
 from .models import  Status
 from .models import  Character_Status
-from .models import  Vehicle_Status	
+from .models import  Character_Vehicle_Status	
+from .models import  Group_Vehicle_Status	
 admin.site.register(Status)
 admin.site.register(Character_Status)
-admin.site.register(Vehicle_Status)	
+admin.site.register(Character_Vehicle_Status)	
+admin.site.register(Group_Vehicle_Status)	
 
 #NPC
 from .models import NPC
@@ -73,4 +83,4 @@ admin.site.register(War_Crime)
 
 #Administration
 from .models import  character_Access
-admin.site.register(character_Access)\
+admin.site.register(character_Access)
