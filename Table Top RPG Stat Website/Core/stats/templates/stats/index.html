@@ -1,7 +1,7 @@
 {% if topTenGroups %}
     <ul>
     {% for Group in topTenGroups %}
-        <li><a href="group/{{ Group.GID }}">{{ Group.Group_name }}</a></li>
+        <li><a href="group/{{ Group.GID }}">{{ Group.Name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
