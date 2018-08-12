@@ -2,7 +2,7 @@
 This Folder contains a spell checker written in Python 
 (This program was written using python 2.7 on a Linux: Ubuntu 12.04)
 
-BKasign.py is the final program.
+Spellcheck.py is the final program.
 
 Instructions
   Type "Python Spellcheck.py" to run the program 
