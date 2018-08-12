@@ -6,6 +6,6 @@ techology used:
 	https://www.djangoproject.com/
 
 
-note: the SQLdatabase is NOT on this repo. this repo only contains the logic and strugure of the desired webpage not any of the character or player information.
+note: the SQLdatabase is NOT on this repo. this repo only contains the logic and structure of the desired webpage not any of the character or player information.
 
 created by John Stanley
