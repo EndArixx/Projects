@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 
 #models
 from .models import Group
+from .models import Player
 from .models import Character
 from .models import Character_HP
 from .models import character_Access
@@ -40,16 +41,18 @@ def CharacterSheet(request, CIDin):
 	#check access rights of user.
 	if request.user.is_authenticated:
 		uname = request.user.get_username()
-		#check table for access
 		try:
-			accessstats = character_Access.objects.get(username = uname, CID = CIDin)
+			#Get player Name
+			playA = Player.objects.get(Name = uname)
+			PIDin = playA.PID
+			accessstats = character_Access.objects.get(PID = PIDin, CID = CIDin)
 			if accessstats != None:
 				Access = accessstats.HasAccess
 				uname  = uname + ' - ' + str(Access)
 			else:
 				uname = uname +  ' - [not in table]' 
 		except Character.DoesNotExist:
-			raise Http404("group does not exist")
+			raise Http404("Character does not exist")
 		except Exception as e:
 			uname = uname + '[Access Error]' + str(e)
 		
