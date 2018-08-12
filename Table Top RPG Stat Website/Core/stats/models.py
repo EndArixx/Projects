@@ -130,25 +130,32 @@ class Armor(models.Model):
 	def __str__(self):
 		return self.Name
 
-#Ideas
-#	1) a table for each zone 
-#		head,core,arms,legs
-#	2) FK columns on each zone	
-#		head = AID.FK, core = AID.FK etc...
 class Character_Equipped_Armor(models.Model):
-	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
-	AID = models.ForeignKey(Armor, on_delete=models.CASCADE)
-	Equiped_Head = models.BooleanField(default = True)
-	Equiped_Core = models.BooleanField(default = True)
-	Equiped_Right_Arm = models.BooleanField(default = True)
-	Equiped_Left_Arm = models.BooleanField(default = True)
-	Equiped_Right_Leg = models.BooleanField(default = True)
-	Equiped_Left_Leg = models.BooleanField(default = True)
+	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
+	#AID = models.ForeignKey(Armor, on_delete=models.CASCADE)
+	Equiped_Head = models.ForeignKey(Armor, related_name='Head_Armor', on_delete=models.CASCADE)
+	Equiped_Core = models.ForeignKey(Armor, related_name='Core_Armor', on_delete=models.CASCADE)
+	Equiped_Right_Arm  = models.ForeignKey(Armor, related_name='Right_Arm_Armor', on_delete=models.CASCADE)
+	Equiped_Left_Arm = models.ForeignKey(Armor, related_name='Left_Arm_Armor', on_delete=models.CASCADE)
+	Equiped_Right_Leg  = models.ForeignKey(Armor, related_name='Right_Leg_Armor', on_delete=models.CASCADE)
+	Equiped_Left_Leg  = models.ForeignKey(Armor, related_name='Left_Leg_Armor', on_delete=models.CASCADE)
 	notes = models.CharField(max_length=2000,blank=True, null=True)
-	class Meta:
-		unique_together = (('CID', 'AID'),)
+	def save(self, *args, **kwargs):
+		if not self.Equiped_Head.Allow_Head:
+			raise Exception('Armor ' + self.Equiped_Head.Name + ' cannot be equiped to: Head')
+		if not self.Equiped_Core.Allow_Core:
+			raise Exception('Armor ' + self.Equiped_Core.Name + '  cannot be equiped to: Core')
+		if not self.Equiped_Right_Arm.Allow_Right_Arm:
+			raise Exception('Armor ' + self.Equiped_Right_Arm.Name + '  cannot be equiped to: Right Arm')
+		if not self.Equiped_Left_Arm.Allow_Left_Arm:
+			raise Exception('Armor ' + self.Equiped_Left_Arm.Name + '  cannot be equiped to: Left Arm')
+		if not self.Equiped_Right_Leg.Allow_Right_Leg:
+			raise Exception('Armor ' + self.Equiped_Right_Leg.Name + '  cannot be equiped to: Right Leg')
+		if not self.Equiped_Left_Leg.Allow_Left_Leg:
+			raise Exception('Armor ' + self.Equiped_Left_Leg.Name + '  cannot be equiped to: Left Leg')
+		super(Character_Equipped_Armor, self).save(*args, **kwargs)
 	def __str__(self):
-		return self.CID.Name + ' - '+ self.AID.Name
+		return self.CID.Name
 		
 class Character_Equipped_Armor_Value(models.Model):
 		#Charater ID
@@ -373,24 +380,24 @@ class Character_Status(models.Model):
 		return self.CID.Name + ' - '+ self.SUID.Name
 
 class Character_Vehicle_Status(models.Model):
-	CVID = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+	CVID = models.ForeignKey(Character_Vehicle, on_delete=models.CASCADE)
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
 	notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CVID', 'SUID')
 		verbose_name_plural = 'Character_Vehicle_statuses'
 	def __str__(self):
-		return self.CVID.Name + ' - '+ self.SUID.Name
+		return self.CVID.VID.Name + ' - '+ self.SUID.Name
 		
 class Group_Vehicle_Status(models.Model):
-	GVID = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+	GVID = models.ForeignKey(Group_Vehicle, on_delete=models.CASCADE)
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
 	notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('GVID', 'SUID')
 		verbose_name_plural = 'Group_Vehicle_statuses'
 	def __str__(self):
-		return self.GVID.Name + ' - '+ self.SUID.Name
+		return self.GVID.VID.Name + ' - '+ self.SUID.Name
 #------------------------------------------------------------------------------			
 #-------------------------------- NPC -----------------------------------------
 #------------------------------------------------------------------------------	
