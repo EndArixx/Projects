@@ -27,7 +27,9 @@ IMPORTANT Identifiers/ForeignKeys:
 
 
 '''
-This is the ID of the Actually player, this is used when the player logs in.
+GC_notes is used by the Game Commander.
+This should never show up on any pages that normal players can see. 
+Every table should have this so the GC can add a note on anything.
 '''
 
 #JOHN LOOK INTO IMPORTING USER FOR PLAYER TABLE
@@ -40,7 +42,7 @@ This is the ID of the Actually player, this is used when the player logs in.
 class Player(models.Model):
 	PID = models.AutoField(primary_key=True)
 	Name = models.CharField(max_length=200)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 
@@ -50,7 +52,7 @@ class Faction(models.Model):
 	Name =  models.CharField(max_length=200)
 	Image  =  models.CharField(max_length=200, blank=True, null=True)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 				
@@ -59,7 +61,7 @@ class Group(models.Model):
 	GID = models.AutoField(primary_key=True)
 	FID = models.ForeignKey(Faction, on_delete=models.CASCADE) 
 	Name = models.CharField(max_length=200)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 	
@@ -87,7 +89,7 @@ class Character(models.Model):
 	ActionSurges_stat = models.IntegerField(default=0)
 	Weakness_failed_stat = models.IntegerField(default=0)
 	Weakness_passed_stat = models.IntegerField(default=0)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 
@@ -108,7 +110,7 @@ class Character_HP(models.Model):
 	Left_Arm_HP = models.IntegerField(default=Max_Left_Arm_HP.default)
 	Right_Leg_HP = models.IntegerField(default=Max_Right_Leg_HP.default)
 	Left_Leg_HP = models.IntegerField(default=Max_Left_Leg_HP.default)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.CID.Name
 
@@ -126,7 +128,7 @@ class Armor(models.Model):
 	Allow_Left_Arm = models.BooleanField(default = True)
 	Allow_Right_Leg = models.BooleanField(default = True)
 	Allow_Left_Leg = models.BooleanField(default = True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 
@@ -139,7 +141,7 @@ class Character_Equipped_Armor(models.Model):
 	Equiped_Left_Arm = models.ForeignKey(Armor, related_name='Left_Arm_Armor', on_delete=models.CASCADE)
 	Equiped_Right_Leg  = models.ForeignKey(Armor, related_name='Right_Leg_Armor', on_delete=models.CASCADE)
 	Equiped_Left_Leg  = models.ForeignKey(Armor, related_name='Left_Leg_Armor', on_delete=models.CASCADE)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def save(self, *args, **kwargs):
 		if not self.Equiped_Head.Allow_Head:
 			raise Exception('Armor ' + self.Equiped_Head.Name + ' cannot be equiped to: Head')
@@ -174,7 +176,7 @@ class Character_Equipped_Armor_Value(models.Model):
 	Left_Arm_Armor = models.IntegerField(default=Max_Left_Arm_Armor.default)
 	Right_Leg_Armor = models.IntegerField(default=Max_Right_Leg_Armor.default)
 	Left_Leg_Armor = models.IntegerField(default=Max_Left_Leg_Armor.default)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.CID.Name
 
@@ -186,14 +188,14 @@ class Weapon_Range(models.Model):
 	RID = models.AutoField(primary_key=True)
 	Name =  models.CharField(max_length=200)
 	Distance = models.IntegerField(default=0)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 
 class Weapon_Ammo(models.Model):
 	AAID = models.AutoField(primary_key=True)
 	Name =  models.CharField(max_length=200)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 		
@@ -206,7 +208,7 @@ class Weapon(models.Model):
 	Capacity = models.IntegerField(default=1)
 	Rarity  = models.IntegerField(default=1)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 		
@@ -215,7 +217,7 @@ class Character_Weapon(models.Model):
 	WID = models.ForeignKey(Weapon, on_delete=models.CASCADE) 
 	Count = models.IntegerField(default=1)
 	Equiped = models.BooleanField(default = False)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CID', 'WID')
 	def __str__(self):
@@ -229,7 +231,7 @@ class Character_Weapon(models.Model):
 class Stat(models.Model):
 	STID = models.AutoField(primary_key=True)
 	Name =  models.CharField(max_length=200,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 		
@@ -248,7 +250,7 @@ class Skill(models.Model):
 	STID =  models.ForeignKey(Stat, on_delete=models.CASCADE) 
 	Name =  models.CharField(max_length=200,blank=True, null=True)
 	Cost = models.IntegerField(default=2)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 		
@@ -256,7 +258,7 @@ class Character_Skill(models.Model):
 	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
 	SID = models.ForeignKey(Skill, on_delete=models.CASCADE) 
 	Mod = models.IntegerField(default=4)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CID', 'SID')
 	def __str__(self):
@@ -268,7 +270,7 @@ class Character_Power(models.Model):
 	Power_stat =  models.IntegerField(default=0)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
 	Hidden = models.BooleanField(default = False)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.CID.Name + ' - '+ self.Name
 		
@@ -284,7 +286,8 @@ class Character_Item(models.Model):
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
 	Equipable = models.BooleanField(default = False)
 	Equiped = models.BooleanField(default = False)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	Hidden = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.CID.Name + ' - '+ self.Name
 		
@@ -296,7 +299,7 @@ class Group_Item(models.Model):
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
 	Equipable = models.BooleanField(default = False)
 	Equiped = models.BooleanField(default = False)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.GID.Name + ' - '+ self.Name
 
@@ -305,7 +308,7 @@ class Vehicle(models.Model):
 	VID = models.AutoField(primary_key=True)
 	Name =  models.CharField(max_length=200)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 		
@@ -316,7 +319,8 @@ class Character_Vehicle(models.Model):
 	functional = models.BooleanField(default = False)
 	HP = models.IntegerField(default=100)
 	Max_HP = models.IntegerField(default=100)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	Hidden = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('VID', 'CID')
 	def __str__(self):
@@ -329,7 +333,7 @@ class Group_Vehicle(models.Model):
 	functional = models.BooleanField(default = False)
 	HP = models.IntegerField(default=100)
 	Max_HP = models.IntegerField(default=100)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('VID', 'GID')
 	def __str__(self):
@@ -341,7 +345,8 @@ class Character_Vehicle_Feature(models.Model):
 	Count = models.IntegerField(default=1)
 	Equiped = models.BooleanField(default = False)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	Hidden = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 
@@ -351,7 +356,7 @@ class Group_Vehicle_Feature(models.Model):
 	Count = models.IntegerField(default=1)
 	Equiped = models.BooleanField(default = False)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
 	
@@ -363,7 +368,7 @@ class Status(models.Model):
 	SUID = models.AutoField(primary_key=True)
 	Name =  models.CharField(max_length=200)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		verbose_name = 'Status'
 		verbose_name_plural = 'Statuses'
@@ -373,7 +378,7 @@ class Status(models.Model):
 class Character_Status(models.Model):
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
 	CID = models.ForeignKey(Character, on_delete=models.CASCADE)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CID', 'SUID')
 	def __str__(self):
@@ -382,7 +387,7 @@ class Character_Status(models.Model):
 class Character_Vehicle_Status(models.Model):
 	CVID = models.ForeignKey(Character_Vehicle, on_delete=models.CASCADE)
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CVID', 'SUID')
 		verbose_name_plural = 'Character_Vehicle_statuses'
@@ -392,7 +397,7 @@ class Character_Vehicle_Status(models.Model):
 class Group_Vehicle_Status(models.Model):
 	GVID = models.ForeignKey(Group_Vehicle, on_delete=models.CASCADE)
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('GVID', 'SUID')
 		verbose_name_plural = 'Group_Vehicle_statuses'
@@ -410,7 +415,7 @@ class NPC(models.Model):
 	Status = models.ForeignKey(Status, on_delete=models.CASCADE)
 	FID = models.ForeignKey(Faction, on_delete=models.CASCADE) 
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		verbose_name = 'NPC'
 		verbose_name_plural = 'NPCs'
@@ -422,13 +427,25 @@ class NPC_Disposition(models.Model):
 	NID = models.ForeignKey(NPC, on_delete=models.CASCADE)
 	GID = models.ForeignKey(Group, on_delete=models.CASCADE)
 	Disposition = models.IntegerField(default=0)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('NID', 'GID')
 		verbose_name = 'NPC_Disposition'
 		verbose_name_plural = 'NPC_Dispositions'
 	def __str__(self):
 		return self.NID.Name + ' - '+ self.GID.Name
+	
+class Character_NPC_Note(models.Model):
+		#player notes about the NPC
+	NID = models.ForeignKey(NPC, on_delete=models.CASCADE)
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE)
+	Note  = models.CharField(max_length=2000)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
+	class Meta:
+		unique_together = ('NID', 'CID')
+	def __str__(self):
+		return self.NID.Name + ' - '+ self.CID.Name
+		
 	
 #------------------------------------------------------------------------------	
 #----------------------------- MISC -------------------------------------------
@@ -439,7 +456,7 @@ class War_Crime(models.Model):
 	Name =  models.CharField(max_length=200)
 	GID = models.ForeignKey(Group, on_delete=models.CASCADE)
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name		
 		
@@ -454,7 +471,7 @@ class character_Access(models.Model):
 	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
 	HasAccess = models.BooleanField(default = False)
 	HasEdit = models.BooleanField(default = False)
-	notes = models.CharField(max_length=2000,blank=True, null=True)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = (('PID', 'CID'),)
 	def __str__(self):

@@ -112,8 +112,12 @@ class NPC_DispositionInline(admin.StackedInline):
 	model = NPC_Disposition
 	extra = 0
 	
+class Character_NPC_NoteInline(admin.StackedInline):
+	model = Character_NPC_Note
+	extra = 0
+	
 class NPCAdmin(admin.ModelAdmin):
-	inlines = [NPC_DispositionInline]
+	inlines = [NPC_DispositionInline, Character_NPC_NoteInline]
 admin.site.register(NPC,NPCAdmin)
 
 #Administration---------------------------------------------------------------------------
