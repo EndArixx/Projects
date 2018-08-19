@@ -87,7 +87,7 @@ class Character(models.Model):
 	#Details
 	Appearance  =  models.CharField(max_length=2000)
 	Gender  =  models.CharField(max_length=200)
-	Age = models.IntegerField(default=18)
+	Age = models.IntegerField(default=20)
 	#Hidden data
 	Max_ActionSurges_stat = models.IntegerField(default=5)
 	Total_ActionSurges_stat = models.IntegerField(default=0)
