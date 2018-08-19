@@ -2,11 +2,7 @@
 {% if chractersInGroup %}
     <ul>
     {% for Character in chractersInGroup %}
-        <hi><p style="font-size:50px;"><b>{{ Character.Name }}</b></p></h1>
-		<ul>
-		<li><a href="../CharacterSheet/{{ Character.CID }}">CharacterSheet</a></li>
-		<li> other stats </li>
-		</ul>
+        <hi><p style="font-size:50px;"><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></p></h1>
     {% endfor %}
     </ul>
 {% else %}

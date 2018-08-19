@@ -1,14 +1,11 @@
 from django.shortcuts import get_object_or_404,render
 from django.contrib.auth.decorators import permission_required
-#needed?
+from django.http import Http404, HttpResponse
 from django.http import HttpResponseRedirect
+from django.contrib.staticfiles import finders
 
 #models
-from .models import Group
-from .models import Player
-from .models import Character
-from .models import Character_HP
-from .models import character_Access
+from .models import  *
 
 #forms
 from .forms import CharacterForm
@@ -31,10 +28,84 @@ def group(request, GIDin):
 #these are the players characters
 def player(request, PID):
 	return HttpResponse("You're looking at the chracters of %s." % PID)
+
+	
+#player Character Sheet	
+def Character_Sheet(request, CIDin):
+	uname = 'NotLoggedIn'
+	Access = False
+	
+	#check access rights of user.
+	if request.user.is_authenticated:
+		uname = request.user.get_username()
+		try:
+			#Get player Name
+			playA = Player.objects.get(Name = uname)
+			PIDin = playA.PID
+			accessstats = character_Access.objects.get(PID = PIDin, CID = CIDin)
+			if accessstats != None:
+				Access = accessstats.HasAccess
+				uname  = uname + ' - ' + str(Access)
+			else:
+				uname = uname +  ' - [not in table]' 
+		except Exception as e:
+			uname = uname + '[Access Error]' + str(e)
+		
+	character = get_object_or_404(Character,CID = CIDin)
+		
+	try:
+		#getHP/Armour Data		
+		characterHP = get_object_or_404(Character_HP,CID = CIDin)	
+		#john this is dirty
+		characterArmor = Character_Equipped_Armor_Value.objects.filter(CID = CIDin).first()
+		characterStatus = Character_Status.objects.filter(CID = CIDin, Hidden = False)
+		
+		#team members
+		groupMembers = Character.objects.filter(GID = character.GID)
+	
+		#stats
+		characterStat = Character_Stat.objects.filter(CID = CIDin)	
+		characterSkill = Character_Skill.objects.filter(CID = CIDin)	
+		characterPower = Character_Power.objects.filter(CID = CIDin, Hidden = False)	
+
+		#Items
+		characterWeapon = Character_Weapon.objects.filter(CID = CIDin, Hidden = False)	
+		characterGear = Character_Item.objects.filter(CID = CIDin, Equipable = True, Hidden = False)	
+		characterItem = Character_Item.objects.filter(CID = CIDin, Equipable = False, Hidden = False)	
+		
+		characterDetails = Character_Details.objects.filter(CID = CIDin, Hidden = False)	
+		
+		if not character.Image:		
+			character.Image = 'default.png'
+		else:
+			image = finders.find('stats/character/'+character.Image)
+			if not image:
+				character.Image = 'invalid.png'
+			
+		
+	except Exception as e:
+		print(str(e))
+		raise Http404("Error loading character: " + str(character.Name))
+
+	return render(request, 'stats/CharacterNewLim.html', {
+	'character': character,
+	'characterHP': characterHP,
+	'characterArmor': characterArmor,
+	'groupMembers': groupMembers,
+	'characterStat': characterStat,
+	'characterSkill': characterSkill,
+	'characterPower': characterPower,
+	'characterWeapon': characterWeapon,
+	'characterGear': characterGear,
+	'characterItem': characterItem,
+	'characterDetails': characterDetails,
+	'characterStatus': characterStatus,
+	'userNamePass': uname})	
 	
 	
+#JOHN USED FOR TESTING YOU MAY REMOVE AFTER NEW SHEETS ARE COMPLETED
 #player characters
-def CharacterSheet(request, CIDin):
+def Character_Old(request, CIDin):
 	uname = 'NotLoggedIn'
 	Access = False
 	

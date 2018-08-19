@@ -77,13 +77,6 @@ class Character(models.Model):
 	GID = models.ForeignKey(Group, on_delete=models.CASCADE) 
 	Name =  models.CharField(max_length=200)
 	Image  =  models.CharField(max_length=200, blank=True, null=True)
-	#stats 
-	#JOHN REMOVE DIS
-	MIND_stat = models.IntegerField(default=0)
-	FIST_stat = models.IntegerField(default=0)
-	EYES_stat = models.IntegerField(default=0)
-	FACE_stat = models.IntegerField(default=0)
-	HEART_stat = models.IntegerField(default=0)
 	#Details
 	Appearance  =  models.CharField(max_length=2000)
 	Gender  =  models.CharField(max_length=200)
@@ -103,6 +96,8 @@ class Character_Details(models.Model):
 	Details =  models.CharField(max_length=2000,blank=True, null=True)
 	Hidden = models.BooleanField(default = False)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return str(self.id) +"-" + self.CID.Name
 	
 class Character_HP(models.Model):
 	#Character ID
@@ -174,12 +169,12 @@ class Character_Equipped_Armor_Value(models.Model):
 		#Charater ID
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
 		#Max allowed HP per slot
-	Max_Head_Armor = models.IntegerField(default=0)
-	Max_Core_Armor = models.IntegerField(default=0)
-	Max_Right_Arm_Armor = models.IntegerField(default=0)
-	Max_Left_Arm_Armor = models.IntegerField(default=0)
-	Max_Right_Leg_Armor = models.IntegerField(default=0)
-	Max_Left_Leg_Armor = models.IntegerField(default=0)
+	Max_Head_Armor = models.IntegerField(default=15)
+	Max_Core_Armor = models.IntegerField(default=15)
+	Max_Right_Arm_Armor = models.IntegerField(default=15)
+	Max_Left_Arm_Armor = models.IntegerField(default=15)
+	Max_Right_Leg_Armor = models.IntegerField(default=15)
+	Max_Left_Leg_Armor = models.IntegerField(default=15)
 		#Current HP per slot
 	Head_Armor = models.IntegerField(default=Max_Head_Armor.default)
 	Core_Armor = models.IntegerField(default=Max_Core_Armor.default)
@@ -228,6 +223,7 @@ class Character_Weapon(models.Model):
 	WID = models.ForeignKey(Weapon, on_delete=models.CASCADE) 
 	Count = models.IntegerField(default=1)
 	Equiped = models.BooleanField(default = False)
+	Hidden = models.BooleanField(default = False)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CID', 'WID')
@@ -389,6 +385,7 @@ class Status(models.Model):
 class Character_Status(models.Model):
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
 	CID = models.ForeignKey(Character, on_delete=models.CASCADE)
+	Hidden = models.BooleanField(default = False)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CID', 'SUID')
@@ -398,6 +395,7 @@ class Character_Status(models.Model):
 class Character_Vehicle_Status(models.Model):
 	CVID = models.ForeignKey(Character_Vehicle, on_delete=models.CASCADE)
 	SUID = models.ForeignKey(Status, on_delete=models.CASCADE) 
+	Hidden = models.BooleanField(default = False)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('CVID', 'SUID')

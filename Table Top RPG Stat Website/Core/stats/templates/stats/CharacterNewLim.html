@@ -1,0 +1,365 @@
+<!-- RPG Hosting created by John Stanley 2018-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Character Sheet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+   
+   
+	/* The dopnav menu */
+	.topnav {
+		background-color: #333;
+		overflow: hidden;
+	}
+
+	/* Style the links inside the navigation bar */
+	.topnav a {
+		float: left;
+		color: #f2f2f2;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		font-size: 17px;
+	}
+
+	/* Change the color of links on hover */
+	.topnav a:hover {
+		background-color: #ddd;
+		color: black;
+	}
+
+	/* Add a color to the active/current link */
+	.topnav a.active {
+		background-color: #4CAF50;
+		color: white;
+	}
+    /* The sidebar menu */
+	.sidenav {
+	    z-index: 1; /* Stay on top */
+		top: 0; /* Stay at the top */
+		left: 0;
+		height: 100%; /* Full-height: remove this if you want "auto" height */
+		color: #ffffff;
+		background-color: #3b7651; /* green */
+		min-height:100%;
+		padding-bottom: 150%; /* THIS! made the green go all the way to the bottem*/
+	}
+
+	/* The navigation menu links */
+	.sidenav a {
+		padding: 6px 8px 6px 16px;
+		text-decoration: none;
+		font-size: 25px;
+		color: #ffffff;
+		display: block;
+	}
+	
+	/* When you mouse over the navigation links, change their color */
+	.sidenav a:hover {
+		color: #394639;
+	}
+	
+	.nav-pills > li.active > a{
+		color: white;
+		background-color: #262626; /* DarkGray */
+	}
+	
+	/* Style page content */
+	.main {
+		background-color: #262626; /* DarkGray */
+	}
+        
+	.well-lg {
+		color: #ffffff;
+		background-color: #3b7651; /* green */
+		//padding: 6px 8px 6px 16px;
+		margin: 16px 0;
+	}
+	.well{
+		color: black;
+		background-color: white;
+	}	
+		
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;} 
+    }
+    
+  </style>
+</head>
+<body>
+<div class="main">
+
+<div class="topnav hidden-xs">
+  <a class="active" href="#home">CoreCityComics.com</a>
+  <a href="#">Comics</a>
+  <a href="#">The Forest RPG</a>
+  <a href="#">About</a>
+</div>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">CCC</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+		<ul class="nav navbar-nav">
+		<li class="active"><a href="#">CoreCityComics.com<</a></li>
+		<li><a href="#">Comics</a></li>
+		<li><a href="#">The Forest RPG</a></li>
+		<li><a href="#">About</a></li>
+        <li class="active"><a href="{% url 'group' character.GID.GID %}">{{ character.GID.Name }}</a></li>
+        {% for member in groupMembers %}
+			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
+		{% endfor %}
+        <li class="active"><a href="#">NPCs</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid"><div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2>Nav</h2>
+      <ul class="nav nav-pills nav-stacked">
+		<li class="active"><a href="{% url 'group' character.GID.GID %}">{{ character.GID.Name }}</a></li>
+        {% for member in groupMembers %}
+			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
+		{% endfor %}
+        <li class="active"><a href="#">NPCs</a></li>
+      </ul>
+    </div>
+    <br>
+	
+<div class="col-sm-9">
+    <div class="col-md-8">
+        <div class="container-fluid bg-1 text-center">
+			{% load static %}
+			<img class="img-responsive" src="{% static 'stats/character/' %}{{character.Image}}" alt="Player Image"/>
+			<div class="well">
+            <h3><b>Name:</b>  {{ character.Name }}</h3>
+			</div>
+        </div>
+		<div class="col-md-12">
+		  <div class="row">
+			<div class="col-xs-4">
+			  <div class="well">
+				<P><b>Age:</b> {% if character.Age < 0 %} Unknown{% else %} {{character.Age }}{% endif %}</P>
+			  </div>
+			</div>
+			<div class="col-xs-4">
+			  <div class="well">
+				<P4><b>Gender:</b> {{ character.Gender }}</P>
+			  </div>
+			</div>
+			<div class="col-xs-4">
+			  <div class="well">
+				<P><b>Faction:</b> {{ character.GID.FID.Name }}</P>
+			  </div>
+			</div>
+		  </div>
+			<div class="row">
+				<div class="well">
+					<h4>Appearance</h4>
+					<p>{{ character.Appearance }}</p>
+				 </div>
+			</div>
+		</div>  	
+    </div>
+	  
+	  
+    <div class="col-md-4"> 
+        <div class="row">
+			<div class="col">
+                <div class="well">
+                  <h4><b>Action Surges</b></h4>
+				  <div class="well">
+				  <h3 class="text-center"><b>{{ character.ActionSurges_stat }}/{{ character.Max_ActionSurges_stat }}</b></h3>
+                </div></div>
+            </div>
+            <div class="col">
+                <div class="well">
+                  <h4><b>Stats</b></h4>
+				  <div class="well">
+				  {% if characterStat %}
+					{% for cstat in characterStat %}
+						<p>{{ cstat.STID.Name }} - {{ cstat.Value}}</p> 
+				    {% endfor %}
+				  {% else %}
+					<p>No Stats</p>
+				  {% endif %}
+                </div></div>
+            </div>
+            <div class="col">
+                <div class="well">
+                  <h4><b>Skills</b></h4>
+				  <div class="well">
+                  {% if characterSkill %}
+					{% for cSkill in characterSkill %}
+						<p>{{ cSkill.SID.Name }} - {{ cSkill.Mod}}</p> 
+				    {% endfor %}
+				  {% else %}
+					<p>No Skills</p>
+				  {% endif %}
+                </div></div>
+            </div>
+			<div class="col">
+                <div class="well">
+                  <h4><b>Powers</b></h4>
+				  <div class="well">
+                  {% if characterPower %}
+					{% for cPower in characterPower %}
+						<p>{{ cPower.Name }} - {{ cPower.Power_stat}}</p> 
+				    {% endfor %}
+				  {% else %}
+					<p>No Powers</p>
+				  {% endif %}
+                </div></div>
+            </div>
+        </div>
+    </div>
+	  
+	  
+	<div class="col-md-12"> 
+		<div class="well-lg">
+          <h4>(Armor) <b>Health</b></h4>
+		  
+         {% if characterHP %}
+		  <div class="well">
+			<table style="width:100%">
+				<tr>
+					<td> </td>
+					<td> </td>
+					<td>Head:</td>
+					<td>{% if characterArmor %}({{characterArmor.Head_Armor}} /{{characterArmor.Max_Head_Armor}}) {% endif %}
+					<b>{{characterHP.Head_HP}} / {{characterHP.Max_Head_HP}}</b></td>
+					<td> </td>
+					<td> </td>
+				</tr>
+				<tr>
+					<td>Left Arm:</td>
+					<td>{% if characterArmor %}({{characterArmor.Left_Arm_Armor}} /{{characterArmor.Max_Left_Arm_Armor}}) {% endif %}
+					<b>{{characterHP.Left_Arm_HP}} / {{characterHP.Max_Left_Arm_HP}}</b></td>
+					<td>Core:</td>
+					<td>{% if characterArmor %}({{characterArmor.Core_Armor}} /{{characterArmor.Max_Core_Armor}}) {% endif %}
+					<b>{{characterHP.Core_HP}} / {{characterHP.Max_Core_HP}}</b></td>
+					<td>Right Arm:</td>
+					<td>{% if characterArmor %}({{characterArmor.Right_Arm_Armor}} /{{characterArmor.Max_Right_Arm_Armor}}) {% endif %}
+					<b>{{characterHP.Right_Arm_HP}} / {{characterHP.Max_Right_Arm_HP}}</b></td>
+				</tr>
+				<tr>
+					<td>Left Leg:</td>
+					<td>{% if characterArmor %}({{characterArmor.Left_Leg_Armor}} /{{characterArmor.Max_Left_Leg_Armor}}) {% endif %}
+					<b>{{characterHP.Left_Leg_HP}} / {{characterHP.Max_Left_Leg_HP}}</b></td>
+					<td></td>
+					<td></td>
+					<td>Right Leg:</td>
+					<td>{% if characterArmor %}({{characterArmor.Right_Leg_Armor}} /{{characterArmor.Max_Right_Leg_Armor}}) {% endif %}
+					<b>{{characterHP.Right_Leg_HP}} / {{characterHP.Max_Right_Leg_HP}}</b></td>
+				</tr>
+			</table>
+		  </div>
+		{% endif %}
+        </div>
+		
+		<div class="well">
+          <h4><b>Status</b></h4>
+          {% if characterStatus %}
+			{% for cStatus in characterStatus %}
+				<p>{{ cStatus.SUID.Name }} - {{ cStatus.SUID.Details}}</p> 
+			{% endfor %}
+		  {% else %}
+			<p>No Status Effects</p>
+		  {% endif %}
+        </div>
+	</div>
+    
+    
+	<div class="col-md-12">
+	 <div class="well-lg">
+		<div class="row">
+			<div class="col-sm-6">
+			  <div class="well">
+				<h3><b>Weapons</b></h3>
+				{% if characterWeapon %}
+					{% for cWeapon in characterWeapon %}
+						<h4>{% if  cWeapon.Equiped %}[X]{% else %}[ ]{% endif %} {{ cWeapon.WID.Name }}</h4>
+						<div class="well">
+						<p>range: {{ cWeapon.WID.RID.Name}} ({{ cWeapon.WID.RID.Distance}})</p> 
+						<p>Ammo: {{ cWeapon.WID.AAID.Name}} ({{ cWeapon.WID.Capacity}})</p> 
+						<p>Details: {{ cWeapon.WID.Details}}</p> 
+						</div>
+				    {% endfor %}
+				  {% else %}
+					<p>No Weapons</p>
+				  {% endif %}
+			  </div>
+			</div>
+			<div class="col-sm-6">
+			  <div class="well">
+				<h3><b>Equipment</b></h3>
+				{% if characterGear %}
+					{% for cGear in characterGear %}
+						<div class="well">
+							<h4> {% if  cGear.Equiped %}[X]{% else %}[ ]{% endif %} {{ cGear.Name }}</h4> 
+							<p>{% if  cGear.Count > 1 %}({{ cGear.Count }}){% endif %} {{ cGear.Details}}</p> 
+						</div>
+				    {% endfor %}
+				  {% else %}
+					<p>No Equipment</p>
+				 {% endif %}
+			  </div>
+			</div>
+		</div>
+		<div class="row">
+		<div class="col-md-12">
+		  <div class="well">
+			<h3><b>Items</b></h3>
+			{% if characterItem %}
+					{% for cItem in characterItem %}
+						<div class="well">
+							<h4>{{ cItem.Name }}</h4> 
+							<p>{% if  cItem.Count > 1 %}({{ cItem.Count }}){% endif %}  {{ cItem.Details}}</p> 
+						</div>
+				    {% endfor %}
+				  {% else %}
+					<p>No Items</p>
+				 {% endif %}
+		  </div>
+		</div></div>
+	  </div>
+    </div>
+	
+	<div class="col-md-12">
+		<div class="row">
+			{% if characterDetails %}
+				<div class="well">
+					<h4><b>Additional Details</b></h4>
+						{% for cDetail in characterDetails %}
+							<p>{{ cDetail.Details }}</p> 
+						{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+ 
+ </div>
+ 
+	
+</div>
+</div>
+</div>
+
+
+</body>
+</html>
