@@ -84,6 +84,11 @@ class Character(models.Model):
 	EYES_stat = models.IntegerField(default=0)
 	FACE_stat = models.IntegerField(default=0)
 	HEART_stat = models.IntegerField(default=0)
+	#Details
+	Appearance  =  models.CharField(max_length=2000)
+	Gender  =  models.CharField(max_length=200)
+	Age = models.IntegerField(default=18)
+	#Hidden data
 	Max_ActionSurges_stat = models.IntegerField(default=5)
 	Total_ActionSurges_stat = models.IntegerField(default=0)
 	ActionSurges_stat = models.IntegerField(default=0)
@@ -93,8 +98,14 @@ class Character(models.Model):
 	def __str__(self):
 		return self.Name
 
+class Character_Details(models.Model):	
+	CID = models.ForeignKey(Character, on_delete=models.CASCADE)
+	Details =  models.CharField(max_length=2000,blank=True, null=True)
+	Hidden = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
+	
 class Character_HP(models.Model):
-	#Charater ID
+	#Character ID
 	CID = models.OneToOneField(Character, on_delete=models.CASCADE, primary_key = True) 
 		#Max allowed HP per slot
 	Max_Head_HP = models.IntegerField(default=25)

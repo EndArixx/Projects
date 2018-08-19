@@ -70,6 +70,9 @@ admin.site.register(Group,GroupAdmin)
 class Character_StatusInline(admin.StackedInline):
 	model = Character_Status
 	extra = 0
+class Character_DetailsInline(admin.StackedInline):
+	model = Character_Details
+	extra = 0
 class Character_HPInline(admin.StackedInline):
 	model = Character_HP
 class Character_StatInline(admin.StackedInline):
@@ -96,6 +99,7 @@ class Character_VehicleInline(admin.StackedInline):
 class CharacterAdmin(admin.ModelAdmin):
 	inlines = [
 	Character_StatusInline,
+	Character_DetailsInline,
 	Character_HPInline,
 	Character_StatInline,
 	Character_SkillInline,
