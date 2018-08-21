@@ -1,100 +1,6 @@
-<!-- RPG Hosting created by John Stanley 2018-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Character Sheet</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-   
-   
-	/* The dopnav menu */
-	.topnav {
-		background-color: #333;
-		overflow: hidden;
-	}
-
-	/* Style the links inside the navigation bar */
-	.topnav a {
-		float: left;
-		color: #f2f2f2;
-		text-align: center;
-		padding: 14px 16px;
-		text-decoration: none;
-		font-size: 17px;
-	}
-
-	/* Change the color of links on hover */
-	.topnav a:hover {
-		background-color: #ddd;
-		color: black;
-	}
-
-	/* Add a color to the active/current link */
-	.topnav a.active {
-		background-color: #4CAF50;
-		color: white;
-	}
-    /* The sidebar menu */
-	.sidenav {
-	    z-index: 1; /* Stay on top */
-		top: 0; /* Stay at the top */
-		left: 0;
-		height: 100%; /* Full-height: remove this if you want "auto" height */
-		color: #ffffff;
-		background-color: #3b7651; /* green */
-		min-height:100%;
-		padding-bottom: 150%; /* THIS! made the green go all the way to the bottem*/
-	}
-
-	/* The navigation menu links */
-	.sidenav a {
-		padding: 6px 8px 6px 16px;
-		text-decoration: none;
-		font-size: 25px;
-		color: #ffffff;
-		display: block;
-	}
-	
-	/* When you mouse over the navigation links, change their color */
-	.sidenav a:hover {
-		color: #394639;
-	}
-	
-	.nav-pills > li.active > a{
-		color: white;
-		background-color: #262626; /* DarkGray */
-	}
-	
-	/* Style page content */
-	.main {
-		background-color: #262626; /* DarkGray */
-	}
-        
-	.well-lg {
-		color: #ffffff;
-		background-color: #3b7651; /* green */
-		//padding: 6px 8px 6px 16px;
-		margin: 16px 0;
-	}
-	.well{
-		color: black;
-		background-color: white;
-	}	
-		
-    /* On small screens, set height to 'auto' for the grid */
-    @media screen and (max-width: 767px) {
-      .row.content {height: auto;} 
-    }
-    
-  </style>
-</head>
-<body>
-<div class="main">
-
+{% extends 'stats/base.html' %}
+{% block title %}{{ character.Name }} 's CharacterSheet{% endblock %}
+{% block content %}
 <div class="topnav hidden-xs">
   <a class="active" href="#home">CoreCityComics.com</a>
   <a href="#">Comics</a>
@@ -354,12 +260,6 @@
 	</div>
  
  </div>
- 
-	
 </div>
 </div>
-</div>
-
-
-</body>
-</html>
+{% endblock %}

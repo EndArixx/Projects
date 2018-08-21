@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf.urls import url
+from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -8,4 +10,7 @@ urlpatterns = [
 	path('CharacterSheet/<int:CIDin>', views.Character_Sheet, name='CharacterSheet'),
 	path('Character/<int:CIDin>', views.Character_Old, name='character'),
 	path('group/<int:GIDin>', views.group, name = 'group'),
+	#login stuff
+	url(r'^login/$', auth_views.login, {'template_name': 'stats/login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/stats/'}, name='logout'),
 ]
