@@ -1,10 +1,15 @@
+{% extends 'stats/base.html' %}
 
+{% block title %}Group{% endblock %}
+
+{% block content %}
 {% if chractersInGroup %}
-    <ul>
+    <div class="container-fluid">
     {% for Character in chractersInGroup %}
-        <hi><p style="font-size:50px;"><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></p></h1>
+        <h1><p><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></p></h1>
     {% endfor %}
-    </ul>
+    </div>
 {% else %}
     <p>No characters are available.</p>
 {% endif %}
+{% endblock %}

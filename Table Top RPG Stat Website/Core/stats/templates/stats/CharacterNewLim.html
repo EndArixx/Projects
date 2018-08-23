@@ -1,12 +1,6 @@
 {% extends 'stats/base.html' %}
 {% block title %}{{ character.Name }} 's CharacterSheet{% endblock %}
 {% block content %}
-<div class="topnav hidden-xs">
-  <a class="active" href="#home">CoreCityComics.com</a>
-  <a href="#">Comics</a>
-  <a href="#">The Forest RPG</a>
-  <a href="#">About</a>
-</div>
 
 <nav class="navbar navbar-inverse visible-xs">
   <div class="container-fluid">
@@ -22,17 +16,19 @@
 		<ul class="nav navbar-nav">
 		<li class="active"><a href="#">CoreCityComics.com</a></li>
 		<li><a href="#">Comics</a></li>
-		<li><a href="#">The Forest RPG</a></li>
-		<li><a href="#">About</a></li>
+		<li><a href="stats">The Forest RPG</a></li>
         <li class="active"><a href="{% url 'group' character.GID.GID %}">{{ character.GID.Name }}</a></li>
         {% for member in groupMembers %}
 			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
 		{% endfor %}
         <li class="active"><a href="#">NPCs</a></li>
+		<li class="active"> <a href="/stats/PlayerHandbook">Player Handbook</a></li>
       </ul>
     </div>
   </div>
 </nav>
+
+
 
 <div class="container-fluid"><div class="row content">
     <div class="col-sm-3 sidenav hidden-xs">
@@ -43,6 +39,7 @@
 			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
 		{% endfor %}
         <li class="active"><a href="#">NPCs</a></li>
+		<li class="active"> <a href="/stats/PlayerHandbook">Player Handbook</a></li>
       </ul>
     </div>
     <br>

@@ -1,9 +1,18 @@
+{% extends 'stats/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
 {% if topTenGroups %}
-    <ul>
+    <div class="container-fluid">
+	<div class="well">
     {% for Group in topTenGroups %}
-        <li><a href="group/{{ Group.GID }}">{{ Group.Name }}</a></li>
+        <h1><p><a href="group/{{ Group.GID }}">{{ Group.Name }}</a></p></h1>
     {% endfor %}
-    </ul>
+    </div>
+	</div>
 {% else %}
     <p>No Groups are available.</p>
 {% endif %}
+{% endblock %}

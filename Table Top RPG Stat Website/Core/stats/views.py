@@ -10,6 +10,10 @@ from .models import  *
 #forms
 from .forms import CharacterForm
 
+#player handbook, this is static.
+def PlayerHandbook(request):
+	return render(request, 'stats/playerHB.html')
+
 #Show a list of all the groups
 def index(request):
 	topTenGroups = Group.objects.order_by('GID')[:10]

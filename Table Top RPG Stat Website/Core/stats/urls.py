@@ -10,6 +10,7 @@ urlpatterns = [
 	path('CharacterSheet/<int:CIDin>', views.Character_Sheet, name='CharacterSheet'),
 	path('Character/<int:CIDin>', views.Character_Old, name='character'),
 	path('group/<int:GIDin>', views.group, name = 'group'),
+	path('PlayerHandbook',views.PlayerHandbook, name = 'PlayerHandbook'),
 	#login stuff
 	url(r'^login/$', auth_views.login, {'template_name': 'stats/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/stats/'}, name='logout'),

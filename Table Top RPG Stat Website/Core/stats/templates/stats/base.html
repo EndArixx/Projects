@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
   <style>
    
-	body { background: #262626;
-	!important;}
+	
    
 	/* The dopnav menu */
 	.topnav {
@@ -74,8 +74,22 @@
 	/* Style page content */
 	.main {
 		background-color: #262626; /* DarkGray */
+		color: white;
 	}
-        
+
+	body {
+		/*Fonts from gooooooogle*/
+        font-family: 'Noto Sans', sans-serif;
+		background: #262626;
+		!important;
+    }
+    body a {
+		color: White !important;
+	}
+	
+	
+	
+	/* WELLS ------------------------------------------------*/
 	.well-lg {
 		color: #ffffff;
 		background-color: #3b7651; /* green */
@@ -86,16 +100,24 @@
 		color: black;
 		background-color: white;
 	}	
-		
+	.well a{
+		color: Black !important;
+	}
+	
     /* On small screens, set height to 'auto' for the grid */
     @media screen and (max-width: 767px) {
       .row.content {height: auto;} 
     }
-    
+
   </style>
 </head>
 <body>
 <div class="main">
+<div class="topnav hidden-xs">
+  <a class="active" href="#home">CoreCityComics.com</a>
+  <a href="#">Comics</a>
+  <a href="/stats/">The Forest RPG</a>
+</div>
 	{% block content %}
 	{% endblock %}
 </div>

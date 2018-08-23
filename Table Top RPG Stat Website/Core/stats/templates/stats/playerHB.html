@@ -1,0 +1,233 @@
+{% extends 'stats/base.html' %}
+
+{% block title %}Player Handbook{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid">
+	<h3><p><span style="font-size: large;"><strong>[The forest Table Top RPG]</strong></span></p></h3>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<div class = well>
+		<h2><strong>-Basic Stats-</strong></h2>
+		<p>&nbsp;</p>
+		<h3><strong>Mind</strong>:</h3>
+			<p>&emsp;Intelligence</p>
+		<h3><strong>Face:</strong></h3>
+			<p>&emsp;Charisma</p>
+		<h3><strong>Fist</strong>:</h3>
+			<p>&emsp;Attacking</p>
+		<h3><strong>Eyes</strong>:</h3>
+			<p>&emsp;Perception</p>
+		<h3><strong>Tech</strong>:</h3>
+			<p>&emsp;This is based on the technology itself. for example a tank could have a tech stat of +5 which the driver would roll to try and cross a muddy field</p>
+		<h3><strong>Power</strong>:</h3>
+			<p>&emsp; This would be used for any kind of magic stat or super power. each spell/spell group or power would have a unique ability mode per player. (Could be used for curtain hidden abilities) this stat can grow as the player learns how to use it. for example if a player learns fireball it would start +0 but after a while as they use it a lot it would become +1 and so on</p>
+	</div>
+	
+	<p>&nbsp;</p>
+	<p>This game will have a return of hero/villain moments in the form of "<strong>Action Moments</strong>" and "<strong>Moments of Weakness</strong>". when a player rolls a 20 they gain an action moment and are able to overcome problems. Action moments will grant the player resolve that can be used later to avoid rolling in certain situations(think of it like taking a ten). but if a player rolls a 1 they can choose to take a moment of weakness. they still accomplish the action but the GC will be able to decide HOW they succeeded. Action Moments max out at 5, you can use 3 to take a twenty. 4 players may also use up 1 action surge each to perform a &ldquo;<strong>Team Action</strong>&rdquo; all 4 players roll and the highest roll is used.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-Grade system-</strong></p>
+	<p>&nbsp;</p>
+	<p>Players are given a starting 'Grade' in the following classes:</p>
+	<p>&nbsp;</p>
+	<p>Written Exams (MIND)</p>
+	<p>Combat Range (FIST)</p>
+	<p>Field Exercises (EYES)</p>
+	<p>Group Tasks (FACE)</p>
+	<p>&nbsp;</p>
+	<p>(grades MUST average a C (score wise NOT modifier wise))</p>
+	<p>Letter : Stat Modifier : score</p>
+	<p>-----------------------------------------------</p>
+	<p>A : +4 : 5</p>
+	<p>B : +2 : 4</p>
+	<p>C : +1 : 3</p>
+	<p>D : 0 :</p>
+	<p>E : -2 : 1</p>
+	<p>&nbsp;</p>
+	<p>Players can choose to get really good grades in some categies and crap grades in other. OR they can spend them evenly to be a more rounded but less specialied soldier.</p>
+	<p>&nbsp;</p>
+	<p>Example grades:</p>
+	<p>AAEE -&gt; average(5,5,1,1) = 3</p>
+	<p>CCCC -&gt; average(3,3,3,3) = 3</p>
+	<p>ACDD -&gt; average(5,3,2,2) = 3</p>
+	<p>BCCD -&gt; average(4,3,3,2) = 3</p>
+	<p>&nbsp;</p>
+	<p>These modifiers can be altered after the game starts. the grade system is only a jumping off point. through leveling or rewards a player could get there -2 to 0 or there +4 to a +6. etc. (Max +6 after level up)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-Specialized Skills-</strong></p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>specialist mod starts out at +4</p>
+	<p>&nbsp;</p>
+	<p>players are given 6 points to spend on specialized skills. players cannot take skills in categorize they got a D or E in.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>Combat</strong> (Fist): Grade A-E</p>
+	<p>----------------------------------------</p>
+	<p>Sniper range : 1</p>
+	<p>Assualt Range : 1</p>
+	<p>CQC range : 1</p>
+	<p>Melee range : 1</p>
+	<p>Explosives : 1</p>
+	<p>&nbsp;</p>
+	<p>Intellectual (Mind)</p>
+	<p>----------------------------------------</p>
+	<p>Engineering : 2</p>
+	<p>Military Tactics : 2</p>
+	<p>Medicine : 2</p>
+	<p>&nbsp;</p>
+	<p>Speaker (Face)</p>
+	<p>----------------------------------------</p>
+	<p>Espionage : 2</p>
+	<p>Diplomacy : 2</p>
+	<p>Interrogation : 2</p>
+	<p>&nbsp;</p>
+	<p>Recon (Eyes)</p>
+	<p>----------------------------------------</p>
+	<p>Scout : 2</p>
+	<p>Natural Survial : 2</p>
+	<p>Trap Disarmament : 2</p>
+	<p>&nbsp;</p>
+	<p>When a player makes a skill roll, they add the stat mod + specialist mod</p>
+	<p>(for example a player who trained with snipers and got an A in FIST would roll a D20 + 8.)</p>
+	<p>If the player doesnt know the skill, then the roll a normal D20 plus the accocied Stat with NO specialist mod.</p>
+	<p>(for example a player who didnt train in melee and only got a C in Fist woud roll a D20 + 1 + 0)</p>
+	<p>If the player is attempting to do something outside of what is listed above have them roll a D20 + the stat mod that makes the most sense.</p>
+	<p>&nbsp;</p>
+	<p><strong>-Hidden Talents-</strong></p>
+	<p>&nbsp;</p>
+	<p>Each player will be able to choose one or several hidden talents depending on size. the GC should work with the player to give them something that makes them special but also is balanced with others and doesn&rsquo;t break the game. These hidden talents offer special skills or items and do not need to be revealed player to player.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-Health-</strong></p>
+	<p>&nbsp;</p>
+	<p>character health takes teh form of a five pointed star. at the top of the star is the Head HP, the left and right sides are left and right arms and legs. and finally in the middle is the core HP</p>
+	<p>&nbsp;</p>
+	<p>standard soldier:</p>
+	<p>Head: 25</p>
+	<p>Left Arm: 30 ☆ Right Arm:30</p>
+	<p>Left Leg:30 core: 50 Right Leg:30</p>
+	<p>&nbsp;</p>
+	<p>Heath States:</p>
+	<p>if any body part is 10 or lower it is considered damaged and will take negatives on rolls.</p>
+	<p>if any body part is 5 or lower it is considered disabled and cannot be used. If this is core or head, they are no longer conscious.</p>
+	<p>if any body part is 0 then it is permanently disable until fixed by a medical professional or replaced. If it is the head or Core that reaches 0, the person dies. They can however be resuscitated in given situations.</p>
+	<p>&nbsp;</p>
+	<p>Non-Lethal attacks cannot drop any body part below 1</p>
+	<p>&nbsp;</p>
+	<p><strong>-Load out-</strong></p>
+	<p>&nbsp;</p>
+	<p>When players leave the tank they tell the Game Command which weapons, gear, armor, etc. they're bringing with them. It is up to the commander and should be 'within reason'</p>
+	<p>&nbsp;</p>
+	<p><strong>-Armour-</strong></p>
+	<p>&nbsp;</p>
+	<p>Armor absorbs damage before it hits the player but breaks down slowly. for example lets say a player has 15 armor and is shot with a 20 bullet. the armor reduces the bullet to only 5 damage but the armor itself is also damaged and now is 14 armor.</p>
+	<p>however, some attacks may ignore armor and hit the HP directly such as Armor piercing rounds or specific called shots that hit weak points in the armor. The exact funtionality of armor is left up to GC. for example you could have a full body sheild that only has 1 Armor point but recharges every other turn. so attacks must be made in quick succession.</p>
+	<p>&nbsp;</p>
+	<p>Cover, Cover is different than armor, instead of reducing the damage done, cover makes the role harder, so if an enemy needs a 15 to hit but they're in -5 cover, the player subtracts his roll by 5 so if they roll a 16 then subtract cover the attack misses. same goes for the enemies attack role if the player is in cover. if someone is in full cover they cannot be targeted with a normal attack.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-Combat-</strong></p>
+	<p>&nbsp;</p>
+	<p>At the beginning of Combat everyone rolls eye stat to determine Combat order.</p>
+	<p>each character has 3 action points and 1 break points per rotation.</p>
+	<p>during his turn he can spend the actions on things such as movement or attacking. the exact nature of what they are doing determines the amount of action points they need to spend. for example they can move a normal distance in 1 or they can sprint much further by spending all 3 action points.</p>
+	<p>&nbsp;</p>
+	<p>During any turn if a player is about to be effected by an action they can spend there breakpoints to react to the action. this could be dodging an explosion. or taking a shot at someone attempting to run past them. It is important that the player is somehow effected by the action to allow them to take a break point.</p>
+	<p>&nbsp;</p>
+	<p>Ties go to the defender if they are in cover otherwise they go to the attacker.</p>
+	<p>&nbsp;</p>
+	<p>Guard, a player may choose to gaurd a zone for 1 action. this allows them to use their reaction to attack anyone that enters the zone.</p>
+	<p>&nbsp;</p>
+	<p>Grenades can be thrown 30units</p>
+	<p>&nbsp;</p>
+	<p>Action chart:</p>
+	<p>(each player has 3 actions per turn)</p>
+	<p>players may spend 1 action to move 30 units</p>
+	<p>&nbsp;</p>
+	<p>Shooting:</p>
+	<p>1: hip fire.</p>
+	<p>cannot name target but instead must attack core.</p>
+	<p>2: Aim shot.</p>
+	<p>standard attack, can name target Head, Body, Arm, Leg (see below)</p>
+	<p>3: steadied shot, spray or special:</p>
+	<p>Steadied: same as aimshot but add +1 to 2d6 shooting roll, does double damage if weakness is known.</p>
+	<p>Spray: with a machinegun you unload targeting multiple people</p>
+	<p>Special: Something special to the weapons such as an underbarrel granade launcher.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>Melee</p>
+	<p>1: Light</p>
+	<p>2: Hedium</p>
+	<p>3: Heavy</p>
+	<p>&nbsp;</p>
+	<p><strong>-Shooting Mechanics-</strong></p>
+	<p>&nbsp;</p>
+	<p>Weapon range:</p>
+	<p>Melee : 5- units</p>
+	<p>CQC : 5-25 units</p>
+	<p>Assault : 25/75 units</p>
+	<p>Sniper : 75+ units</p>
+	<p>&nbsp;</p>
+	<p>Player rolls a D20 + Fist + specialist mod</p>
+	<p>if they hit</p>
+	<p>the player then names a target and rolls for it target and rolls two D6s for target.</p>
+	<p>&nbsp;</p>
+	<p>HEAD</p>
+	<p>10 or more : head shot</p>
+	<p>9 to 7 : body shot</p>
+	<p>less 7 : glancing shot</p>
+	<p>&nbsp;</p>
+	<p>BODY</p>
+	<p>greater 3 : body shot</p>
+	<p>3 or less : glancing shot</p>
+	<p>&nbsp;</p>
+	<p>ARM/LEG</p>
+	<p>greater 7 : Limb Shot</p>
+	<p>7 to 5 : body shot</p>
+	<p>4 or less : glancing shot</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-Tank shooting-</strong></p>
+	<p>&nbsp;</p>
+	<p>when firing a tank or artillery, if the shot misses, then first roll a 1d4 or 1d8</p>
+	<p>&nbsp;</p>
+	<p>(1d4 rules)</p>
+	<p>1 - up</p>
+	<p>2 - right</p>
+	<p>3 - down</p>
+	<p>4 - left</p>
+	<p>&nbsp;</p>
+	<p>(1d8 rules)</p>
+	<p>1 - up</p>
+	<p>2 - up right</p>
+	<p>3 - right</p>
+	<p>4 - down right</p>
+	<p>5 - down</p>
+	<p>6 - down left</p>
+	<p>7 - left</p>
+	<p>8 - up left</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>-Experience-</p>
+	<p>&nbsp;</p>
+	<p>This game doesn&rsquo;t have experience. Instead rewards are given after major story events or defeating great opponents.</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>-Leveling-</p>
+	<p>&nbsp;</p>
+	<p>After each major story event or great opponents. the players are rewarded. These should be associated with said victory and is entirely up to the GC (so if you are the GC don&rsquo;t be too harsh. remember to reward your players. Make them feel like they actually accomplished something. Reward creativity but on the same note. don&rsquo;t spoil them. they should feel like they worked toward and earned the rewards.)</p>
+	<p>&nbsp;</p>
+	<p>&nbsp;</p>
+	<p><strong>-The Tank-</strong></p>
+	<p>&nbsp;</p>
+	<p>The tank is your mobile home base. you can always restock on food, ammo etc.</p>
+	<p><strong>Do NOT lose your tank.</strong> the tank has the forest regulator. without that, it is impossible to navigate the forest. The tank is also actively tracking your location and mapping out previous zones so you don&rsquo;t have to. T<strong>his is your home! </strong><strong>T</strong><strong>ake care of your home!</strong></p>
+	<p>the tank is also able to burn a fuel cell to return to the forest in emergency situations. but use it sparingly because you only have 3 fuel cells to start out, Also you have no idea where in the forest you will end up.</p>
+</div>
+{% endblock %}
