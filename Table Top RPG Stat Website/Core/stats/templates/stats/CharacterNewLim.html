@@ -1,49 +1,5 @@
-{% extends 'stats/base.html' %}
-{% block title %}{{ character.Name }} 's CharacterSheet{% endblock %}
-{% block content %}
-
-<nav class="navbar navbar-inverse visible-xs">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">CCC</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-		<ul class="nav navbar-nav">
-		<li class="active"><a href="#">CoreCityComics.com</a></li>
-		<li><a href="#">Comics</a></li>
-		<li><a href="stats">The Forest RPG</a></li>
-        <li class="active"><a href="{% url 'group' character.GID.GID %}">{{ character.GID.Name }}</a></li>
-        {% for member in groupMembers %}
-			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
-		{% endfor %}
-        <li class="active"><a href="#">NPCs</a></li>
-		<li class="active"> <a href="/stats/PlayerHandbook">Player Handbook</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-
-<div class="container-fluid"><div class="row content">
-    <div class="col-sm-3 sidenav hidden-xs">
-      <h2>Nav</h2>
-      <ul class="nav nav-pills nav-stacked">
-		<li class="active"><a href="{% url 'group' character.GID.GID %}">{{ character.GID.Name }}</a></li>
-        {% for member in groupMembers %}
-			<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
-		{% endfor %}
-        <li class="active"><a href="#">NPCs</a></li>
-		<li class="active"> <a href="/stats/PlayerHandbook">Player Handbook</a></li>
-      </ul>
-    </div>
-    <br>
-	
+{% extends 'stats/CharacterBase.html' %}
+{% block SheetLayout %}	
 <div class="col-sm-9">
     <div class="col-md-8">
         <div class="container-fluid bg-1 text-center">
@@ -198,8 +154,8 @@
 					{% for cWeapon in characterWeapon %}
 						<h4>{% if  cWeapon.Equiped %}[X]{% else %}[ ]{% endif %} {{ cWeapon.WID.Name }}</h4>
 						<div class="well">
-						<p>range: {{ cWeapon.WID.RID.Name}} ({{ cWeapon.WID.RID.Distance}})</p> 
-						<p>Ammo: {{ cWeapon.WID.AAID.Name}} ({{ cWeapon.WID.Capacity}})</p> 
+						<p>Range: {{ cWeapon.WID.RID.Name}} ({{ cWeapon.WID.RID.Distance}})</p> 
+						<p>{% if cWeapon.WID.Capacity > 0 %} Ammo:{{ cWeapon.WID.AAID.Name}} ({{ cWeapon.WID.Capacity}}){% endif %}</p> 
 						<p>Details: {{ cWeapon.WID.Details}}</p> 
 						</div>
 				    {% endfor %}
@@ -257,6 +213,4 @@
 	</div>
  
  </div>
-</div>
-</div>
 {% endblock %}
