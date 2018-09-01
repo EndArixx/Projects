@@ -3,16 +3,22 @@
 {% block title %}RPG{% endblock %}
 
 {% block content %}
-
-{% if groupAccess %}
     <div class="container-fluid">
+	<div class="well-lg">
+		<h1 class="active"> <a href="{% url 'PlayerHandbook' %}">Player Handbook</a></h1>
+	</div>
+{% if groupAccess %}
 	<div class="well">
     {% for Group in groupAccess %}
         <h1><p><a href="group/{{ Group.GID.GID }}">{{ Group.GID.Name }}</a></p></h1>
     {% endfor %}
     </div>
-	</div>
+
 {% else %}
     <p>No Groups are available.</p>
 {% endif %}
+	<div class="well">
+        <h4><p><a href="{% url 'logout' %}">Logout</a></p></h4>
+    </div>
+	</div>
 {% endblock %}
