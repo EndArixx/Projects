@@ -12,6 +12,6 @@ urlpatterns = [
 	path('group/<int:GIDin>', views.group, name = 'group'),
 	path('PlayerHandbook',views.PlayerHandbook, name = 'PlayerHandbook'),
 	#login stuff
-	url(r'^login/$', auth_views.login, {'template_name': 'stats/login.html'}, name='login'),
-    url(r'^logout/$', auth_views.logout, {'next_page': '/stats/'}, name='logout'),
+	url(r'^login/$', auth_views.LoginView.as_view(template_name='stats/login.html'), name='login'),
+	url(r'^logout/$', auth_views.LogoutView.as_view(next_page ='/stats/'), name='logout'),
 ]
