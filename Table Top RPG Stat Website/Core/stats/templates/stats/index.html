@@ -1,14 +1,14 @@
 {% extends 'stats/base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}RPG{% endblock %}
 
 {% block content %}
 
-{% if topTenGroups %}
+{% if groupAccess %}
     <div class="container-fluid">
 	<div class="well">
-    {% for Group in topTenGroups %}
-        <h1><p><a href="group/{{ Group.GID }}">{{ Group.Name }}</a></p></h1>
+    {% for Group in groupAccess %}
+        <h1><p><a href="group/{{ Group.GID.GID }}">{{ Group.GID.Name }}</a></p></h1>
     {% endfor %}
     </div>
 	</div>

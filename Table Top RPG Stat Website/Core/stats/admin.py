@@ -126,3 +126,4 @@ admin.site.register(NPC,NPCAdmin)
 
 #Administration---------------------------------------------------------------------------
 admin.site.register(character_Access)
+admin.site.register(Group_Access)

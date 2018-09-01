@@ -470,7 +470,7 @@ class War_Crime(models.Model):
 		return self.Name		
 		
 #------------------------------------------------------------------------------	
-#----------------------- Administraction --------------------------------------
+#----------------------- Administration ---------------------------------------
 #------------------------------------------------------------------------------			
 '''
 This table is used to indicate what players can see what characters.
@@ -478,7 +478,7 @@ This table is used to indicate what players can see what characters.
 class character_Access(models.Model):
 	PID = models.ForeignKey(Player, on_delete=models.CASCADE) 
 	CID = models.ForeignKey(Character, on_delete=models.CASCADE) 
-	HasAccess = models.BooleanField(default = False)
+	HasAccess = models.BooleanField(default = True)
 	HasEdit = models.BooleanField(default = False)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
@@ -486,5 +486,14 @@ class character_Access(models.Model):
 	def __str__(self):
 		return self.PID.Name +' - '+ self.CID.Name
 		
-		
+class Group_Access(models.Model):
+	PID = models.ForeignKey(Player, on_delete=models.CASCADE) 
+	GID = models.ForeignKey(Group, on_delete=models.CASCADE) 
+	IsPlayer = models.BooleanField(default = True)
+	IsGC = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
+	class Meta:
+		unique_together = (('PID', 'GID'),)
+	def __str__(self):
+		return self.PID.Name +' - '+ self.GID.Name
 		

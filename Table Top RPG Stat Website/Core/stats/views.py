@@ -16,9 +16,21 @@ def PlayerHandbook(request):
 
 #Show a list of all the groups
 def index(request):
-	topTenGroups = Group.objects.order_by('GID')[:10]
-	context = {'topTenGroups': topTenGroups}
-	return render(request, 'stats/index.html', context)
+
+	if request.user.is_authenticated:
+		uname = request.user.get_username()
+		try:
+			#Get player Name
+			playA = Player.objects.get(Name = uname)
+			PIDin = playA.PID
+			accessstats = Group_Access.objects.filter(PID = PIDin, IsPlayer = True)
+				
+			context = {'groupAccess': accessstats}
+			return render(request, 'stats/index.html', context)
+		except Exception as e:
+			raise Http404("Error - "+ str(e))
+	else:
+		return render(request, 'stats/indexnolog.html')
 
 #groups
 def group(request, GIDin):
