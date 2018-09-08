@@ -5,9 +5,12 @@
 {% block content %}
 {% if chractersInGroup %}
     <div class="container-fluid">
+	<h1>{{ Group.Name }}</h1>
+	<div class = well>
     {% for Character in chractersInGroup %}
-        <h1><p><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></p></h1>
+        <h2><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></h2>
     {% endfor %}
+	</div>
     </div>
 {% else %}
     <p>No characters are available.</p>

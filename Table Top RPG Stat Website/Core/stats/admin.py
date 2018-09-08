@@ -62,8 +62,12 @@ class War_CrimeInline(admin.StackedInline):
 	model = War_Crime
 	extra = 0	
 	
+class public_GroupInline(admin.StackedInline):
+	model = public_Group
+	extra = 0	
+	
 class GroupAdmin(admin.ModelAdmin):
-	inlines = [Group_ItemInline,Group_VehicleInline,War_CrimeInline]	
+	inlines = [Group_ItemInline,Group_VehicleInline,War_CrimeInline,public_GroupInline]	
 admin.site.register(Group,GroupAdmin)
 
 #Character--------------------------------------------------------------------------------

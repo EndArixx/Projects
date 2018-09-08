@@ -64,8 +64,7 @@ class Group(models.Model):
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name
-	
-		
+
 #------------------------------------------------------------------------------	
 #---------------------------- Character ---------------------------------------
 #------------------------------------------------------------------------------	
@@ -499,4 +498,11 @@ class Group_Access(models.Model):
 		unique_together = (('PID', 'GID'),)
 	def __str__(self):
 		return self.PID.Name +' - '+ self.GID.Name
+		
+class public_Group(models.Model):
+	GID = models.OneToOneField(Group, on_delete=models.CASCADE, primary_key = True) 
+	IsPublic = models.BooleanField(default = False)
+	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
+	def __str__(self):
+		return self.GID.Name
 		

@@ -16,7 +16,7 @@ def PlayerHandbook(request):
 
 #Show a list of all the groups
 def index(request):
-
+	publicGroups = public_Group.objects.filter(IsPublic = True)
 	if request.user.is_authenticated:
 		uname = request.user.get_username()
 		try:
@@ -25,20 +25,23 @@ def index(request):
 			PIDin = playA.PID
 			accessstats = Group_Access.objects.filter(PID = PIDin, IsPlayer = True)
 				
-			context = {'groupAccess': accessstats}
+			context = {'groupAccess': accessstats, 'publicGroups' : publicGroups}
 			return render(request, 'stats/index.html', context)
 		except Exception as e:
 			raise Http404("Error - "+ str(e))
 	else:
-		return render(request, 'stats/indexnolog.html')
+		context = {'publicGroups' : publicGroups}
+		return render(request, 'stats/indexnolog.html',context)
 
 #groups
 def group(request, GIDin):
 	try:
 		chractersInGroup = Character.objects.filter(GID = GIDin)
+		#theGroup = Group.objects.filter(GID = GIDin)
+		theGroup = get_object_or_404(Group,GID = GIDin)
 	except Character.DoesNotExist:
 		raise Http404("group does not exist")
-	return render(request, 'stats/group.html', {'chractersInGroup': chractersInGroup})
+	return render(request, 'stats/group.html', {'chractersInGroup': chractersInGroup, 'Group':theGroup})
 
 	
 #these are the players characters
