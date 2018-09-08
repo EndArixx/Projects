@@ -85,8 +85,11 @@ class Character(models.Model):
 	Max_ActionSurges_stat = models.IntegerField(default=5)
 	Total_ActionSurges_stat = models.IntegerField(default=0)
 	ActionSurges_stat = models.IntegerField(default=0)
-	Weakness_failed_stat = models.IntegerField(default=0)
-	Weakness_passed_stat = models.IntegerField(default=0)
+	Total_MomentofStrength_stat = models.IntegerField(default=0)
+	Max_MomentofStrength_stat = models.IntegerField(default=10)
+	Momentofstrength_stat = models.IntegerField(default=0)
+	MomentofWeakness_failed_stat = models.IntegerField(default=0)
+	MomentofWeakness_passed_stat = models.IntegerField(default=0)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	def __str__(self):
 		return self.Name

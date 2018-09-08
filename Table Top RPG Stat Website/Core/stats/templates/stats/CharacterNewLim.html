@@ -6,7 +6,7 @@
 			{% load static %}
 			<img class="img-responsive" src="{% static 'stats/character/' %}{{character.Image}}" alt="Player Image"/>
 			<div class="well">
-            <h3><b>Name:</b>  {{ character.Name }}</h3>
+            <h1>{{ character.Name }}</h1s>
 			</div>
         </div>
 		<div class="col-md-12">
@@ -40,12 +40,19 @@
     <div class="col-md-4"> 
         <div class="row">
 			<div class="col">
-                <div class="well">
-                  <h4><b>Action Surges</b></h4>
-				  <div class="well">
-				  <h3 class="text-center"><b>{{ character.ActionSurges_stat }}/{{ character.Max_ActionSurges_stat }}</b></h3>
-                </div></div>
-            </div>
+				<div>
+					<div class="col-md-6"> <div class="well-lg">
+					<h4><b>Action Surges</b></h4>
+					  <h3 class="text-center"><b>{{ character.ActionSurges_stat }}/{{ character.Max_ActionSurges_stat }}</b></h3>
+					</div></div>
+					
+					<div class="col-md-6"> <div class="well-lg">
+					<h4><b>Moments of Strength</b></h4>
+					  <h3 class="text-center"><b>{{ character.Momentofstrength_stat }}/{{ character.Max_MomentofStrength_stat }}</b></h3>
+					</div></div>
+					<p>&nbsp;</p>
+				</div>
+			</div>
             <div class="col">
                 <div class="well">
                   <h4><b>Stats</b></h4>
