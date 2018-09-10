@@ -59,7 +59,7 @@
 				  <div class="well">
 				  {% if characterStat %}
 					{% for cstat in characterStat %}
-						<p>{{ cstat.STID.Name }} - {{ cstat.Value}}</p> 
+						<p>{{ cstat.STID.Name }} : {{ cstat.Value}}</p> 
 				    {% endfor %}
 				  {% else %}
 					<p>No Stats</p>
@@ -85,7 +85,8 @@
 				  <div class="well">
                   {% if characterPower %}
 					{% for cPower in characterPower %}
-						<p>{{ cPower.Name }}: + {{ cPower.Power_stat}}</p> 
+						<h1>{{ cPower.Name }} {% if cPower.Power_stat > 0 %} + {{ cPower.Power_stat}} {% endif %}</h1> 
+						<p> {{cPower.Details}}</p>
 				    {% endfor %}
 				  {% else %}
 					<p>No Powers</p>
