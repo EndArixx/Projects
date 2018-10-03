@@ -160,7 +160,7 @@
 				<h3><b>Weapons</b></h3>
 				{% if characterWeapon %}
 					{% for cWeapon in characterWeapon %}
-						<h4>{% if  cWeapon.Equiped %}[X]{% else %}[ ]{% endif %} {{ cWeapon.WID.Name }}</h4>
+						<h4>{% if  cWeapon.Equiped %}[X]{% else %}[ ]{% endif %} {{ cWeapon.WID.Name }} {% if  cWeapon.Count > 1 %}({{ cWeapon.Count }}){% endif %} </h4>
 						<div class="well">
 						<p>Range: {{ cWeapon.WID.RID.Name}} ({{ cWeapon.WID.RID.Distance}})</p> 
 						<p>{% if cWeapon.WID.Capacity > 0 %} Ammo:{{ cWeapon.WID.AAID.Name}} ({{ cWeapon.WID.Capacity}}){% endif %}</p> 

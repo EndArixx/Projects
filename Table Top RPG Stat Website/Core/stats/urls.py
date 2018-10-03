@@ -9,6 +9,8 @@ urlpatterns = [
 	path('player/<int:PID>', views.player, name='player'),
 	path('CharacterSheet/<int:CIDin>', views.Character_Sheet, name='CharacterSheet'),
 	path('group/<int:GIDin>', views.group, name = 'group'),
+	path('group/<int:GIDin>/npcs', views.NPClist,name = 'NPClist'),
+	path('group/<int:GIDin>/npc/<int:NIDin>', views.NPCpage, name = 'NPCpage'),
 	path('PlayerHandbook',views.PlayerHandbook, name = 'PlayerHandbook'),
 	#login stuff
 	url(r'^login/$', auth_views.LoginView.as_view(template_name='stats/login.html'), name='login'),

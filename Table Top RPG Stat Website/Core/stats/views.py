@@ -43,12 +43,23 @@ def group(request, GIDin):
 		raise Http404("group does not exist")
 	return render(request, 'stats/group.html', {'chractersInGroup': chractersInGroup, 'Group':theGroup})
 
+#NPC stuff
+def NPClist(request, GIDin):
+	#return HttpResponse("You're looking at the characters of %s." % GIDin)
+	try:
+		theGroup = get_object_or_404(Group,GID = GIDin)
+	except Character.DoesNotExist:
+		raise Http404("group does not exist")
+	return render(request, 'stats/NPCList.html', {'Group':theGroup})
+	
+def NPCpage(request, GIDin,NIDin):
+	return HttpResponse("You're looking at the characters of " + str(GIDin) + " " + str(NIDin))
 	
 #these are the players characters
 def player(request, PID):
-	return HttpResponse("You're looking at the chracters of %s." % PID)
+	return HttpResponse("You're looking at the characters of %s." % PID)
 
-	
+
 #player Character Sheet	
 def Character_Sheet(request, CIDin):
 	uname = 'NotLoggedIn'
