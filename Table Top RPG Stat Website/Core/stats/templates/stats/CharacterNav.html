@@ -2,5 +2,5 @@
 {% for member in groupMembers %}
 	<li><a href="{% url 'CharacterSheet' member.CID %}">{{ member.Name }}</a></li>
 {% endfor %}
-<li class="active"><a href="#">NPCs</a></li>
+<li class="active"><a href="{% url 'NPClist' character.GID.GID %}">NPCs</a></li>
 <li class="active"> <a href="{% url 'PlayerHandbook' %}">Player Handbook</a></li>

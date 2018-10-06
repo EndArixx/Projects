@@ -10,11 +10,49 @@ from .models import  *
 #forms
 from .forms import CharacterForm
 
+
+#utilities-------------------------------------------------------------------
+def CanViewGroup(request,GIDin):
+	userHasGroup = False
+	publicGroups = public_Group.objects.filter(GID = GIDin).first()
+	if publicGroups != None:
+		userHasGroup = publicGroups.IsPublic
+	if not userHasGroup and request.user.is_authenticated:
+			print('C')
+			uname = request.user.get_username()
+			#Get player Name
+			playA = Player.objects.get(Name = uname)
+			PIDin = playA.PID
+			accessstats = Group_Access.objects.filter(PID = PIDin, GID = GIDin).first()
+			if accessstats != None:
+				print('D')
+				userHasGroup = accessstats.IsPlayer
+	return userHasGroup
+	
+def CanViewCharacter(request,CIDin):
+	userHasCharacter = False
+	character = get_object_or_404(Character,CID = CIDin)
+	userHasCharacter = CanViewGroup(request, character.GID)
+	if not userHasCharacter and request.user.is_authenticated:
+		uname = request.user.get_username()
+		playA = Player.objects.get(Name = uname)
+		PIDin = playA.PID
+		accessstats = character_Access.objects.filter(PID = PIDin, CID = CIDin).first()
+		if accessstats != None:
+			userHasCharacter = accessstats.HasAccess
+	return userHasCharacter
+	
+	
+	
+#Views-----------------------------------------------------------------------
+
 #player handbook, this is static.
+#future idea: base handbook based on game?
 def PlayerHandbook(request):
 	return render(request, 'stats/playerHB.html')
 
-#Show a list of all the groups
+#Index----------------------------------------
+#---------------------------------------------
 def index(request):
 	publicGroups = public_Group.objects.filter(IsPublic = True)
 	if request.user.is_authenticated:
@@ -33,54 +71,54 @@ def index(request):
 		context = {'publicGroups' : publicGroups}
 		return render(request, 'stats/indexnolog.html',context)
 
-#groups
+#Groups---------------------------------------
+#----------------------------------------------
 def group(request, GIDin):
-	try:
-		chractersInGroup = Character.objects.filter(GID = GIDin)
-		#theGroup = Group.objects.filter(GID = GIDin)
-		theGroup = get_object_or_404(Group,GID = GIDin)
-	except Character.DoesNotExist:
-		raise Http404("group does not exist")
-	return render(request, 'stats/group.html', {'chractersInGroup': chractersInGroup, 'Group':theGroup})
+	if CanViewGroup(request, GIDin):
+		try:
+			chractersInGroup = Character.objects.filter(GID = GIDin)
+			#theGroup = Group.objects.filter(GID = GIDin)
+			theGroup = get_object_or_404(Group,GID = GIDin)
+		except Character.DoesNotExist:
+			raise Http404("group does not exist")
+		return render(request, 'stats/group.html', {'chractersInGroup': chractersInGroup, 'Group':theGroup})
+	else:
+		raise Http404()
 
-#NPC stuff
+#NPC stuff------------------------------------
+#---------------------------------------------
 def NPClist(request, GIDin):
-	#return HttpResponse("You're looking at the characters of %s." % GIDin)
-	try:
-		theGroup = get_object_or_404(Group,GID = GIDin)
-	except Character.DoesNotExist:
-		raise Http404("group does not exist")
-	return render(request, 'stats/NPCList.html', {'Group':theGroup})
+	if CanViewGroup(request,GIDin):
+		try:
+			theGroup = get_object_or_404(Group,GID = GIDin)
+		except Character.DoesNotExist:
+			raise Http404("group does not exist")
+		NPC_dis = NPC_Disposition.objects.filter(GID = GIDin)
+		#NPClist = NPC.object.filter(NID = NPC_dis.NID)
+		return render(request, 'stats/NPCList.html', {'Group':theGroup,'NPCList':NPC_dis})
+	else:
+		raise Http404()
 	
 def NPCpage(request, GIDin,NIDin):
-	return HttpResponse("You're looking at the characters of " + str(GIDin) + " " + str(NIDin))
+	if CanViewGroup(request,GIDin):
+		return HttpResponse("You're looking at the characters of " + str(GIDin) + " " + str(NIDin))
+	else:
+		raise Http404()
 	
-#these are the players characters
+#Player---------------------------------------
+#---------------------------------------------
 def player(request, PID):
+	#John Validate player.
 	return HttpResponse("You're looking at the characters of %s." % PID)
-
-
-#player Character Sheet	
-def Character_Sheet(request, CIDin):
-	uname = 'NotLoggedIn'
-	Access = False
 	
-	#check access rights of user.
-	if request.user.is_authenticated:
-		uname = request.user.get_username()
-		try:
-			#Get player Name
-			playA = Player.objects.get(Name = uname)
-			PIDin = playA.PID
-			accessstats = character_Access.objects.get(PID = PIDin, CID = CIDin)
-			if accessstats != None:
-				Access = accessstats.HasAccess
-				uname  = uname + ' - ' + str(Access)
-			else:
-				uname = uname +  ' - [not in table]' 
-		except Exception as e:
-			uname = uname + '[Access Error]' + str(e)
-		
+#Character------------------------------------
+#---------------------------------------------
+def Character_Sheet(request, CIDin):
+	Access = CanViewCharacter(request, CIDin)
+	
+	if not Access:
+		raise Http404()
+	
 	character = get_object_or_404(Character,CID = CIDin)
 		
 	try:
@@ -129,8 +167,7 @@ def Character_Sheet(request, CIDin):
 	'characterGear': characterGear,
 	'characterItem': characterItem,
 	'characterDetails': characterDetails,
-	'characterStatus': characterStatus,
-	'userNamePass': uname})	
+	'characterStatus': characterStatus})	
 	
 	
 #JOHN USED FOR TESTING YOU MAY REMOVE AFTER NEW SHEETS ARE COMPLETED
