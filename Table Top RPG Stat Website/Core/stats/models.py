@@ -438,6 +438,8 @@ class NPC_Disposition(models.Model):
 	NID = models.ForeignKey(NPC, on_delete=models.CASCADE)
 	GID = models.ForeignKey(Group, on_delete=models.CASCADE)
 	Disposition = models.IntegerField(default=0)
+	Details = models.CharField(max_length=2000,blank=True, null=True)
+	EmogiOverride = models.CharField(max_length=5,blank=True, null=True)
 	GC_notes = models.CharField(max_length=2000,blank=True, null=True)
 	class Meta:
 		unique_together = ('NID', 'GID')

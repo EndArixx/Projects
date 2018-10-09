@@ -11,6 +11,9 @@
         <h2><b><a href="../CharacterSheet/{{ Character.CID }}">{{ Character.Name }}</a></b></h2>
     {% endfor %}
 	</div>
+	<div class = well-lg>
+		<h2 class="active"><a href="{% url 'NPClist' Group.GID %}">NPC list</a></h2>
+	</div>
     </div>
 {% else %}
     <p>No characters are available.</p>

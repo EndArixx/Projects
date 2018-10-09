@@ -18,14 +18,12 @@ def CanViewGroup(request,GIDin):
 	if publicGroups != None:
 		userHasGroup = publicGroups.IsPublic
 	if not userHasGroup and request.user.is_authenticated:
-			print('C')
 			uname = request.user.get_username()
 			#Get player Name
 			playA = Player.objects.get(Name = uname)
 			PIDin = playA.PID
 			accessstats = Group_Access.objects.filter(PID = PIDin, GID = GIDin).first()
 			if accessstats != None:
-				print('D')
 				userHasGroup = accessstats.IsPlayer
 	return userHasGroup
 	
@@ -93,7 +91,7 @@ def NPClist(request, GIDin):
 			theGroup = get_object_or_404(Group,GID = GIDin)
 		except Character.DoesNotExist:
 			raise Http404("group does not exist")
-		NPC_dis = NPC_Disposition.objects.filter(GID = GIDin)
+		NPC_dis = NPC_Disposition.objects.filter(GID = GIDin).order_by('-Disposition')
 		#NPClist = NPC.object.filter(NID = NPC_dis.NID)
 		return render(request, 'stats/NPCList.html', {'Group':theGroup,'NPCList':NPC_dis})
 	else:
